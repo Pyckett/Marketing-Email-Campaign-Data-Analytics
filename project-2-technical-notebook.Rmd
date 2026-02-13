@@ -1,0 +1,19 @@
+---
+title: "Project2 Technical Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+```{r}
+email_csv <- read_csv("data/email_metrics.csv")
+
+```
+```{r}
+last_email_csv <- read_csv("data/last_email_before_order.csv")
+```
+```{r}
+glimpse(email_csv)
+```
+

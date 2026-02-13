@@ -1,0 +1,44 @@
+,ORDERNUMBER,ORDERDATE,group,email_subject,date_email_sent,before_march,day_of_week
+1,10211,2004-01-15,Group A,"Fresh Start, Fresh Models—Your Store Will Love These",2004-01-14,True,2
+53,10223,2004-02-20,Group B,NEW ARRIVALS: DON’T MISS THESE POST-VALENTINE’S FAVORITES!,2004-02-18,True,2
+120,10237,2004-04-05,Group B,LIMITED EDITION MODELS FOR APRIL: ORDER FAST!,2004-04-05,False,0
+185,10251,2004-05-18,Group A,Weekly Inspiration: Models Perfect for Father’s Day,2004-05-14,False,4
+473,10215,2004-01-29,Group B,URGENT: THESE MODELS ARE FLYING OFF THE SHELVES!,2004-01-28,True,2
+526,10228,2004-03-10,Group A,Weekly Spotlight: What Your Customers Will Love This Spring,2004-03-10,False,2
+606,10245,2004-05-04,Group A,Your April Favorites—Back in Stock!,2004-04-30,False,4
+987,10210,2004-01-12,Group A,Welcome to 2004! Let’s Start the Year with a Bang,2004-01-07,True,2
+1119,10236,2004-04-03,Group A,End of March Favorites: Your Customers Will Love These,2004-04-02,False,4
+1786,10209,2004-01-09,Group B,NEW YEAR’S BESTSELLERS: LIMITED STOCK AVAILABLE!,2004-01-07,True,2
+1839,10222,2004-02-19,Group A,What’s Trending After Valentine’s? We’ve Got You Covered,2004-02-18,True,2
+1923,10248,2004-05-07,Group A,Let’s Celebrate Moms and Dads with These Collectibles,2004-05-07,False,4
+2354,10217,2004-02-04,Group A,Valentine’s Day is Coming—Add a Little Love to Your Store,2004-02-04,True,2
+2419,10229,2004-03-11,Group B,ACT NOW: SPRING BESTSELLERS FLYING OFF THE SHELVES!,2004-03-08,False,0
+2920,10225,2004-02-22,Group B,NEW ARRIVALS: DON’T MISS THESE POST-VALENTINE’S FAVORITES!,2004-02-18,True,2
+2974,10238,2004-04-09,Group A,April Showers Bring Bestsellers—Stock Up Now!,2004-04-07,False,2
+3389,10220,2004-02-12,Group B,FINAL CALL: VALENTINE’S MODELS ALMOST GONE!,2004-02-11,True,2
+3454,10231,2004-03-19,Group B,DON’T MISS OUT: MID-MARCH’S HOTTEST MODELS!,2004-03-15,False,0
+3495,10247,2004-05-05,Group A,Let’s Celebrate Moms and Dads with These Collectibles,2004-05-05,False,2
+3857,10216,2004-02-02,Group B,URGENT: THESE MODELS ARE FLYING OFF THE SHELVES!,2004-01-28,True,2
+4424,10224,2004-02-21,Group B,NEW ARRIVALS: DON’T MISS THESE POST-VALENTINE’S FAVORITES!,2004-02-18,True,2
+4970,10230,2004-03-15,Group A,Weekly Spotlight: What Your Customers Will Love This Spring,2004-03-12,False,4
+5359,10212,2004-01-16,Group A,"Fresh Start, Fresh Models—Your Store Will Love These",2004-01-14,True,2
+6819,10219,2004-02-10,Group B,SELL OUT ALERT: VALENTINE’S DAY MUST-HAVES!,2004-02-04,True,2
+6951,10246,2004-05-05,Group A,Your April Favorites—Back in Stock!,2004-04-30,False,4
+7465,10239,2004-04-12,Group A,April Showers Bring Bestsellers—Stock Up Now!,2004-04-09,False,4
+8473,10240,2004-04-13,Group A,April Showers Bring Bestsellers—Stock Up Now!,2004-04-07,False,2
+8984,10227,2004-03-02,Group B,TIME-SENSITIVE: LAST CHANCE FOR FEBRUARY’S HOTTEST PICKS!,2004-02-25,True,2
+8998,10227,2004-03-02,Group B,SPRING MODELS JUST IN: ORDER BEFORE THEY’RE GONE!,2004-03-01,False,0
+9065,10244,2004-04-29,Group A,What’s Hot This Week? Find Out Here!,2004-04-23,False,4
+10018,10226,2004-02-26,Group A,February Favorites: Check Out Our Bestsellers This Month,2004-02-25,True,2
+10097,10241,2004-04-13,Group A,April Showers Bring Bestsellers—Stock Up Now!,2004-04-09,False,4
+10606,10250,2004-05-11,Group B,LIMITED SUPPLY: FATHER’S DAY BESTSELLERS IN STOCK NOW!,2004-05-10,False,0
+11000,10214,2004-01-26,Group B,SELL FAST: JANUARY’S MOST POPULAR MODELS!,2004-01-21,True,2
+13927,10243,2004-04-26,Group A,What’s Hot This Week? Find Out Here!,2004-04-21,False,2
+14911,10235,2004-04-02,Group A,End of March Favorites: Your Customers Will Love These,2004-03-31,False,2
+18947,10221,2004-02-18,Group A,What’s Trending After Valentine’s? We’ve Got You Covered,2004-02-18,True,2
+19024,10232,2004-03-20,Group A,Mid-March Marvels: Check Out These Customer Favorites,2004-03-19,False,4
+21076,10252,2004-05-26,Group A,End of May: Perfect Picks for Summer Ahead,2004-05-26,False,2
+23564,10249,2004-05-08,Group A,Let’s Celebrate Moms and Dads with These Collectibles,2004-05-05,False,2
+24489,10213,2004-01-22,Group A,Mid-January Refresh: Perfect Additions to Your Inventory,2004-01-21,True,2
+35193,10233,2004-03-29,Group A,Fresh Finds for the New Season—See What’s in Stock,2004-03-26,False,4
+39191,10242,2004-04-20,Group A,Weekly Update: Must-Have Models for April Events,2004-04-16,False,4
