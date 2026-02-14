@@ -2,18 +2,64 @@
 title: "Project2 Technical Notebook"
 output: html_notebook
 ---
-
+load in tidyverse library 
 ```{r}
 library(tidyverse)
 ```
+read in the email metrics csv 
 ```{r}
 email_csv <- read_csv("data/email_metrics.csv")
 
 ```
+read in the last email before order csv 
 ```{r}
 last_email_csv <- read_csv("data/last_email_before_order.csv")
 ```
+we can see that the columns of group and group code are NOT the same thing; group specifies the general category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
+
 ```{r}
-glimpse(email_csv)
+distinct(email_csv, group, group_code)
 ```
+create copy of original email mentrics dataset  to preserve original version
+```{r}
+cleaned_email_csv <- email_csv 
+
+```
+
+do the same for last_email_sent dataset 
+
+```{r}
+cleaned_last_email_csv <- last_email_csv
+```
+
+based on findings, due to the column number_ordered not having a single instance of 0 orders placed, we can interpret NA as there being 0 orders 
+
+```{r}
+cleaned_email_csv$number_orders[is.na(cleaned_email_csv$number_orders)] <- 0
+```
+
+we can remove the ...1 column as it is just the row index 
+
+```{r}
+cleaned_email_csv <- cleaned_email_csv %>% 
+  select(-`...1`)
+```
+
+```{r}
+cleaned_last_email_csv <- cleaned_last_email_csv %>%
+  select(-`...1`)
+```
+
+ensure that there isnt a instance of there being 0 emails sent 
+```{r}
+any(cleaned_email_csv$emails_sent == 0)
+```
+```{r}
+
+```
+
+
+
+
+
 

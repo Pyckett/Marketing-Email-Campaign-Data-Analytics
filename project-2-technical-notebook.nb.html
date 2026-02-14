@@ -1752,6 +1752,7 @@ display: none;
 
 
 <!-- rnb-text-begin -->
+<p>load in tidyverse library</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR2xpY21GeWVTaDBhV1I1ZG1WeWMyVXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbmxpYnJhcnkodGlkeXZlcnNlKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
@@ -1760,6 +1761,9 @@ display: none;
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>read in the email metrics csv</p>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVaVzFoYVd4ZlkzTjJJRHd0SUhKbFlXUmZZM04yS0Z3aVpHRjBZUzlsYldGcGJGOXRaWFJ5YVdOekxtTnpkbHdpS1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5lbWFpbF9jc3YgPC0gcmVhZF9jc3YoXCJkYXRhL2VtYWlsX21ldHJpY3MuY3N2XCIpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZW1haWxfY3N2IDwtIHJlYWRfY3N2KFwiZGF0YS9lbWFpbF9tZXRyaWNzLmNzdlwiKVxuYGBgIn0= -->
@@ -1767,6 +1771,9 @@ display: none;
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>read in the last email before order csv</p>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR0Z6ZEY5bGJXRnBiRjlqYzNZZ1BDMGdjbVZoWkY5amMzWW9YQ0prWVhSaEwyeGhjM1JmWlcxaGFXeGZZbVZtYjNKbFgyOXlaR1Z5TG1OemRsd2lLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbmxhc3RfZW1haWxfY3N2IDwtIHJlYWRfY3N2KFwiZGF0YS9sYXN0X2VtYWlsX2JlZm9yZV9vcmRlci5jc3ZcIilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGFzdF9lbWFpbF9jc3YgPC0gcmVhZF9jc3YoXCJkYXRhL2xhc3RfZW1haWxfYmVmb3JlX29yZGVyLmNzdlwiKVxuYGBgIn0= -->
@@ -1774,17 +1781,103 @@ display: none;
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>we can see that the columns of group and group code are NOT the same
+thing; group specifies the general category (conversational approach vs
+direct) whereas group_code has subcategories within each approach. 0 2
+and 4 likely correspond to the days of the week (mon, wed, fri) the
+emails were sent</p>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVaMnhwYlhCelpTaGxiV0ZwYkY5amMzWXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbmdsaW1wc2UoZW1haWxfY3N2KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZShlbWFpbF9jc3YpXG5gYGAifQ== -->
-<pre class="r"><code>glimpse(email_csv)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVaR2x6ZEdsdVkzUW9aVzFoYVd4ZlkzTjJMQ0JuY205MWNDd2daM0p2ZFhCZlkyOWtaU2xjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbmRpc3RpbmN0KGVtYWlsX2NzdiwgZ3JvdXAsIGdyb3VwX2NvZGUpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGlzdGluY3QoZW1haWxfY3N2LCBncm91cCwgZ3JvdXBfY29kZSlcbmBgYCJ9 -->
+<pre class="r"><code>distinct(email_csv, group, group_code)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1mcmFtZS1iZWdpbiBleUp0WlhSaFpHRjBZU0k2ZXlKamJHRnpjMlZ6SWpwYkluUmliRjlrWmlJc0luUmliQ0lzSW1SaGRHRXVabkpoYldVaVhTd2libkp2ZHlJNk9Dd2libU52YkNJNk1pd2ljM1Z0YldGeWVTSTZleUpCSUhScFltSnNaU0k2V3lJNElNT1hJRElpWFgxOUxDSnlaR1lpT2lKSU5ITkpRVUZCUVVGQlFVRkNjbFpUVVZWMlJFMUNVaXRUZUhKWVJsSlNhR1k0UTBSV05HWlBTRlI2WVVsWWIyWkRjblJLTjB4d1lWTktkbE53Y1djelpqZFpibUV4VERkU2FHOWtUMDFXUTIxMUt6azVlVmgyTkN0V1lsaERNMUJuTWxWQlFVSlJPRkp2UVhsRVdVaGtNMVkyWmxoQlFqUlNRV05FT0VkRGF6azNNSGx5YlhGb1FVMXBOSEJSVDFsdVdGTjRjRGxsYUhoWFdrcExaWFJEWnk4d01pdGliSE5CYnpCbFUzbG1iR2xZYVhSdVN6UnpOVEZzWTJSVlVWQnJORWt2ZUVGS1VFZFJXbWs1VmtsbldteDVhMU5oTjBJcmVHRktVVk4yZUZCd1MzSXlUa3BLWkhSS1NtMXlPVXR2TWs5eWNXUTRVbWhxWkVjeWJFaFpSQ3RtTDFkT01teDJPVGxXY0M4eE5EZHpWR2h4Vms0ek5HNUViVEZIWms5VVJXeFlTRFYzYUcxTWNuVnBRVk4yTUVJeVltUXhNWGg0VTJaeU1ITjVLMVI0SzFZNGJXMURhR3BKVUZSc056RnlNbTFoVGpoemJURklTelI2YzBkQ2RXVkVlVWRRUTNwcVRrcFVVemxGZDFkYWNIWkpTRGxIY0ZWdmNVeDJjSFIyYkhrNWNscFlMell4V20xbVdIUXdSMFZzVWxvemJVWTNkRk5VVVdOM1MyNXlVVlFyZFd4YVRUSTRjM2xWUzJ4TmNTdDNLM2RtUW1SVVowSlpRVkZCUVVFOVBTSjkgLS0+XG5cbjxkaXYgZGF0YS1wYWdlZHRhYmxlPVwiZmFsc2VcIj5cbiAgPHNjcmlwdCBkYXRhLXBhZ2VkdGFibGUtc291cmNlIHR5cGU9XCJhcHBsaWNhdGlvbi9qc29uXCI+XG57XCJjb2x1bW5zXCI6W3tcImxhYmVsXCI6W1wiZ3JvdXBcIl0sXCJuYW1lXCI6WzFdLFwidHlwZVwiOltcImNoclwiXSxcImFsaWduXCI6W1wibGVmdFwiXX0se1wibGFiZWxcIjpbXCJncm91cF9jb2RlXCJdLFwibmFtZVwiOlsyXSxcInR5cGVcIjpbXCJjaHJcIl0sXCJhbGlnblwiOltcImxlZnRcIl19XSxcImRhdGFcIjpbe1wiMVwiOlwiR3JvdXAgQVwiLFwiMlwiOlwiR3JvdXAgQVwifSx7XCIxXCI6XCJHcm91cCBCXCIsXCIyXCI6XCJHcm91cCBCXCJ9LHtcIjFcIjpcIkdyb3VwIEFcIixcIjJcIjpcIkdyb3VwIEEyXCJ9LHtcIjFcIjpcIkdyb3VwIEJcIixcIjJcIjpcIkdyb3VwIEIyXCJ9LHtcIjFcIjpcIkdyb3VwIEFcIixcIjJcIjpcIkdyb3VwIEEwXCJ9LHtcIjFcIjpcIkdyb3VwIEJcIixcIjJcIjpcIkdyb3VwIEIwXCJ9LHtcIjFcIjpcIkdyb3VwIEFcIixcIjJcIjpcIkdyb3VwIEE0XCJ9LHtcIjFcIjpcIkdyb3VwIEJcIixcIjJcIjpcIkdyb3VwIEI0XCJ9XSxcIm9wdGlvbnNcIjp7XCJjb2x1bW5zXCI6e1wibWluXCI6e30sXCJtYXhcIjpbMTBdLFwidG90YWxcIjpbMl19LFwicm93c1wiOntcIm1pblwiOlsxMF0sXCJtYXhcIjpbMTBdLFwidG90YWxcIjpbOF19LFwicGFnZXNcIjp7fX19XG4gIDxcL3NjcmlwdD5cbjxcL2Rpdj5cblxuPCEtLSBybmItZnJhbWUtZW5kIC0tPlxuIn0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6OCwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI4IMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFCclZTUVV2RE1CUitTeHJYRlJSaGY4Q0RWNGZPSFR6YUlYb2ZDcnRKN0xwYVNKdlNwcWczZjdZbmExTDdSaG9kT01WQ211Kzk5eVh2NCtWYlhDM1BnMlVBQUJROFJvQXlEWUhkM1Y2ZlhBQjRSQWNEOEdDazk3MHlybXFoQU1pNHBRT1luWFN4cDllaHhXWkpLZXRDZy8wMitibHNBbzBlU3lmbGlYaXRuSzRzNTFsY2RVUVBrNEkveEFKUEdRWmk5VklnWmx5a1NhN0IreGFKUVN2eFBwS3IyTkpKZHRKSm1yOUtvMk9ycWQ4UmhqZEcybEhZRCtmL1dOMmx2OTlWcC8xNDdzVGhxVk4zNG5EbTFHZk9URWxYSDV3aG1McnVpQVN2MEIyYmQxMXh4U2ZyMHN5K1R4K1Y4bW1DaGpJUFRsNzFyMm1hTjhzbTFISzR6c0dCdWVEeUdQQ3pqTkpUUzlFd1dacHZJSDlHcFVvcUx2cHR2bHk5clpYLzYxWm1mWHQwR0VsUlozbUY3dFNUUWN3S25yUVQrdWxaTTI4c3lVS2xNcSt3K3dmQmRUZ0JZQVFBQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["group_code"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Group A","2":"Group A"},{"1":"Group B","2":"Group B"},{"1":"Group A","2":"Group A2"},{"1":"Group B","2":"Group B2"},{"1":"Group A","2":"Group A0"},{"1":"Group B","2":"Group B0"},{"1":"Group A","2":"Group A4"},{"1":"Group B","2":"Group B4"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[8]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>create copy of original email mentrics dataset to preserve original
+version</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1bFpGOWxiV0ZwYkY5amMzWWdQQzBnWlcxaGFXeGZZM04ySUZ4dVhHNWdZR0FpZlE9PSAtLT5cblxuYGBgclxuY2xlYW5lZF9lbWFpbF9jc3YgPC0gZW1haWxfY3N2IFxuXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lZF9lbWFpbF9jc3YgPC0gZW1haWxfY3N2IFxuXG5gYGAifQ== -->
+<pre class="r"><code>cleaned_email_csv &lt;- email_csv 
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>do the same for last_email_sent dataset</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1bFpGOXNZWE4wWDJWdFlXbHNYMk56ZGlBOExTQnNZWE4wWDJWdFlXbHNYMk56ZGx4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5jbGVhbmVkX2xhc3RfZW1haWxfY3N2IDwtIGxhc3RfZW1haWxfY3N2XG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lZF9sYXN0X2VtYWlsX2NzdiA8LSBsYXN0X2VtYWlsX2NzdlxuYGBgIn0= -->
+<pre class="r"><code>cleaned_last_email_csv &lt;- last_email_csv</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>based on findings, due to the column number_ordered not having a
+single instance of 0 orders placed, we can interpret NA as there being 0
+orders</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1bFpGOWxiV0ZwYkY5amMzWWtiblZ0WW1WeVgyOXlaR1Z5YzF0cGN5NXVZU2hqYkdWaGJtVmtYMlZ0WVdsc1gyTnpkaVJ1ZFcxaVpYSmZiM0prWlhKektWMGdQQzBnTUZ4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5jbGVhbmVkX2VtYWlsX2NzdiRudW1iZXJfb3JkZXJzW2lzLm5hKGNsZWFuZWRfZW1haWxfY3N2JG51bWJlcl9vcmRlcnMpXSA8LSAwXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lZF9lbWFpbF9jc3YkbnVtYmVyX29yZGVyc1tpcy5uYShjbGVhbmVkX2VtYWlsX2NzdiRudW1iZXJfb3JkZXJzKV0gPC0gMFxuYGBgIn0= -->
+<pre class="r"><code>cleaned_email_csv$number_orders[is.na(cleaned_email_csv$number_orders)] &lt;- 0</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>we can remove the …1 column as it is just the row index</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1bFpGOWxiV0ZwYkY5amMzWWdQQzBnWTJ4bFlXNWxaRjlsYldGcGJGOWpjM1lnSlQ0bElGeHVJQ0J6Wld4bFkzUW9MV0F1TGk0eFlDbGNibUJnWUNKOSAtLT5cblxuYGBgclxuY2xlYW5lZF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9lbWFpbF9jc3YgJT4lIFxuICBzZWxlY3QoLWAuLi4xYClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lZF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9lbWFpbF9jc3YgJT4lIFxuICBzZWxlY3QoLWAuLi4xYClcbmBgYCJ9 -->
+<pre class="r"><code>cleaned_email_csv &lt;- cleaned_email_csv %&gt;% 
+  select(-`...1`)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1bFpGOXNZWE4wWDJWdFlXbHNYMk56ZGlBOExTQmpiR1ZoYm1Wa1gyeGhjM1JmWlcxaGFXeGZZM04ySUNVK0pWeHVJQ0J6Wld4bFkzUW9MV0F1TGk0eFlDbGNibUJnWUNKOSAtLT5cblxuYGBgclxuY2xlYW5lZF9sYXN0X2VtYWlsX2NzdiA8LSBjbGVhbmVkX2xhc3RfZW1haWxfY3N2ICU+JVxuICBzZWxlY3QoLWAuLi4xYClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lZF9sYXN0X2VtYWlsX2NzdiA8LSBjbGVhbmVkX2xhc3RfZW1haWxfY3N2ICU+JVxuICBzZWxlY3QoLWAuLi4xYClcbmBgYCJ9 -->
+<pre class="r"><code>cleaned_last_email_csv &lt;- cleaned_last_email_csv %&gt;%
+  select(-`...1`)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>ensure that there isnt a instance of there being 0 emails sent</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZVzU1S0dOc1pXRnVaV1JmWlcxaGFXeGZZM04ySkdWdFlXbHNjMTl6Wlc1MElEMDlJREFwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG5hbnkoY2xlYW5lZF9lbWFpbF9jc3YkZW1haWxzX3NlbnQgPT0gMClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW55KGNsZWFuZWRfZW1haWxfY3N2JGVtYWlsc19zZW50ID09IDApXG5gYGAifQ== -->
+<pre class="r"><code>any(cleaned_email_csv$emails_sent == 0)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIEZBTFNFXG4ifQ== -->
+<pre><code>[1] FALSE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2plY3QyIFRlY2huaWNhbCBOb3RlYm9vayINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCmBgYHtyfQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCmBgYHtyfQ0KZW1haWxfY3N2IDwtIHJlYWRfY3N2KCJkYXRhL2VtYWlsX21ldHJpY3MuY3N2IikNCg0KYGBgDQpgYGB7cn0NCmxhc3RfZW1haWxfY3N2IDwtIHJlYWRfY3N2KCJkYXRhL2xhc3RfZW1haWxfYmVmb3JlX29yZGVyLmNzdiIpDQpgYGANCmBgYHtyfQ0KZ2xpbXBzZShlbWFpbF9jc3YpDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2plY3QyIFRlY2huaWNhbCBOb3RlYm9vayINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpsb2FkIGluIHRpZHl2ZXJzZSBsaWJyYXJ5IA0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KcmVhZCBpbiB0aGUgZW1haWwgbWV0cmljcyBjc3YgDQpgYGB7cn0NCmVtYWlsX2NzdiA8LSByZWFkX2NzdigiZGF0YS9lbWFpbF9tZXRyaWNzLmNzdiIpDQoNCmBgYA0KcmVhZCBpbiB0aGUgbGFzdCBlbWFpbCBiZWZvcmUgb3JkZXIgY3N2IA0KYGBge3J9DQpsYXN0X2VtYWlsX2NzdiA8LSByZWFkX2NzdigiZGF0YS9sYXN0X2VtYWlsX2JlZm9yZV9vcmRlci5jc3YiKQ0KYGBgDQp3ZSBjYW4gc2VlIHRoYXQgdGhlIGNvbHVtbnMgb2YgZ3JvdXAgYW5kIGdyb3VwIGNvZGUgYXJlIE5PVCB0aGUgc2FtZSB0aGluZzsgZ3JvdXAgc3BlY2lmaWVzIHRoZSBnZW5lcmFsIGNhdGVnb3J5IChjb252ZXJzYXRpb25hbCBhcHByb2FjaCB2cyBkaXJlY3QpIHdoZXJlYXMgZ3JvdXBfY29kZSBoYXMgc3ViY2F0ZWdvcmllcyB3aXRoaW4gZWFjaCBhcHByb2FjaC4gMCAyIGFuZCA0IGxpa2VseSBjb3JyZXNwb25kIHRvIHRoZSBkYXlzIG9mIHRoZSB3ZWVrIChtb24sIHdlZCwgZnJpKSB0aGUgZW1haWxzIHdlcmUgc2VudCANCg0KYGBge3J9DQpkaXN0aW5jdChlbWFpbF9jc3YsIGdyb3VwLCBncm91cF9jb2RlKQ0KYGBgDQpjcmVhdGUgY29weSBvZiBvcmlnaW5hbCBlbWFpbCBtZW50cmljcyBkYXRhc2V0ICB0byBwcmVzZXJ2ZSBvcmlnaW5hbCB2ZXJzaW9uDQpgYGB7cn0NCmNsZWFuZWRfZW1haWxfY3N2IDwtIGVtYWlsX2NzdiANCg0KYGBgDQoNCmRvIHRoZSBzYW1lIGZvciBsYXN0X2VtYWlsX3NlbnQgZGF0YXNldCANCg0KYGBge3J9DQpjbGVhbmVkX2xhc3RfZW1haWxfY3N2IDwtIGxhc3RfZW1haWxfY3N2DQpgYGANCg0KYmFzZWQgb24gZmluZGluZ3MsIGR1ZSB0byB0aGUgY29sdW1uIG51bWJlcl9vcmRlcmVkIG5vdCBoYXZpbmcgYSBzaW5nbGUgaW5zdGFuY2Ugb2YgMCBvcmRlcnMgcGxhY2VkLCB3ZSBjYW4gaW50ZXJwcmV0IE5BIGFzIHRoZXJlIGJlaW5nIDAgb3JkZXJzIA0KDQpgYGB7cn0NCmNsZWFuZWRfZW1haWxfY3N2JG51bWJlcl9vcmRlcnNbaXMubmEoY2xlYW5lZF9lbWFpbF9jc3YkbnVtYmVyX29yZGVycyldIDwtIDANCmBgYA0KDQp3ZSBjYW4gcmVtb3ZlIHRoZSAuLi4xIGNvbHVtbiBhcyBpdCBpcyBqdXN0IHRoZSByb3cgaW5kZXggDQoNCmBgYHtyfQ0KY2xlYW5lZF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9lbWFpbF9jc3YgJT4lIA0KICBzZWxlY3QoLWAuLi4xYCkNCmBgYA0KDQpgYGB7cn0NCmNsZWFuZWRfbGFzdF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9sYXN0X2VtYWlsX2NzdiAlPiUNCiAgc2VsZWN0KC1gLi4uMWApDQpgYGANCg0KZW5zdXJlIHRoYXQgdGhlcmUgaXNudCBhIGluc3RhbmNlIG9mIHRoZXJlIGJlaW5nIDAgZW1haWxzIHNlbnQgDQpgYGB7cn0NCmFueShjbGVhbmVkX2VtYWlsX2NzdiRlbWFpbHNfc2VudCA9PSAwKQ0KYGBgDQpgYGB7cn0NCg0KYGBgDQoNCg0KDQoNCg0KDQo=</div>
 
 
 
