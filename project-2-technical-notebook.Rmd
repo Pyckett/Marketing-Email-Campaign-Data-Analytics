@@ -50,16 +50,51 @@ cleaned_last_email_csv <- cleaned_last_email_csv %>%
   select(-`...1`)
 ```
 
-ensure that there isnt a instance of there being 0 emails sent 
+ensure that there isnt a instance of there being 0 emails sent - there is for number_opens although we can leave this as NaN because 0 opens means the email itself was never interacted with by a user 
 ```{r}
 any(cleaned_email_csv$emails_sent == 0)
+any(cleaned_email_csv$number_opens == 0)
 ```
+create calculated field columns that measures open rate, click rate, open to click rate, unsub rate, and order rate 
+
+```{r}
+cleaned_email_csv <- cleaned_email_csv %>% 
+  mutate(open_rate = (number_opens / emails_sent),
+         click_rate = (number_clicks / emails_sent),
+         open_to_click_rate = (number_clicks / number_opens),
+         unsubscribe_rate = (number_unsub / emails_sent),
+         order_rate = (number_orders / emails_sent)
+  )
+         
+
+```
+
+
+calculate the mean value based on tone for open rate (conversational vs alarming) 
 ```{r}
 
+cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(mean_val = mean(open_rate, na.rm = TRUE))
+
 ```
 
 
+calculate the mean value for click rate based on tone (conversational vs alarming)
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>%
+  summarise(mean_val = mean(click_rate, na.rm = TRUE))
+```
 
 
+calculate the mean value for click to open rate based on tone (conversational vs alarming) 
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>%
+  summarise(mean_val = mean(open_to_click_rate, na.rm = TRUE))
+
+
+```
 
 
