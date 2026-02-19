@@ -1752,12 +1752,15 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<p>load in tidyverse library</p>
+<p>load in tidyverse and libraries needed for statistical tests</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR2xpY21GeWVTaDBhV1I1ZG1WeWMyVXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbmxpYnJhcnkodGlkeXZlcnNlKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
-<pre class="r"><code>library(tidyverse)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR2xpY21GeWVTaDBhV1I1ZG1WeWMyVXBYRzVzYVdKeVlYSjVLSEIzY2lsY2JteHBZbkpoY25rb1kyRnlLVnh1YkdsaWNtRnllU2hsWm1abFkzUnphWHBsS1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkocHdyKVxubGlicmFyeShjYXIpXG5saWJyYXJ5KGVmZmVjdHNpemUpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KHB3cilcbmxpYnJhcnkoY2FyKVxubGlicmFyeShlZmZlY3RzaXplKVxuYGBgIn0= -->
+<pre class="r"><code>library(tidyverse)
+library(pwr)
+library(car)
+library(effectsize)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
@@ -1931,6 +1934,53 @@ cleaned_email_csv %&gt;%
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>running the leven’s test based on tone and the open rate, we recieve
+a p value of 0.0015. our signfiicance rate is 0.05. As 0.0015 &lt; 0.05,
+we can assume that there is enough evidence that the group variances
+between group A and B are different and we reject the null
+hypothesis.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR1YyWlc1bFZHVnpkQ2h2Y0dWdVgzSmhkR1VnZmlCbmNtOTFjQ3dnWkdGMFlTQTlJR05zWldGdVpXUmZaVzFoYVd4ZlkzTjJLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbmxldmVuZVRlc3Qob3Blbl9yYXRlIH4gZ3JvdXAsIGRhdGEgPSBjbGVhbmVkX2VtYWlsX2NzdilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGV2ZW5lVGVzdChvcGVuX3JhdGUgfiBncm91cCwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KVxuYGBgIn0= -->
+<pre class="r"><code>leveneTest(open_rate ~ group, data = cleaned_email_csv)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGV2ZW5lJ3MgVGVzdCBmb3IgSG9tb2dlbmVpdHkgb2YgVmFyaWFuY2UgKGNlbnRlciA9IG1lZGlhbilcbiAgICAgIERmIEYgdmFsdWUgICBQcig+RikgICBcbmdyb3VwICAxICAxMC42MTMgMC4wMDE1NzQgKipcbiAgICAgIDkyICAgICAgICAgICAgICAgICAgICBcbi0tLVxuU2lnbmlmLiBjb2RlczogIFxuICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNVxuICDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
+<pre><code>Levene&#39;s Test for Homogeneity of Variance (center = median)
+      Df F value   Pr(&gt;F)   
+group  1  10.613 0.001574 **
+      92                    
+---
+Signif. codes:  
+  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05
+  ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVkQzUwWlhOMEtHOXdaVzVmY21GMFpTQitJR2R5YjNWd0xDQmhiSFJsY201aGRHbDJaU0E5SUZ3aWRIZHZMbk5wWkdWa1hDSXNJR052Ym1ZdWJHVjJaV3dnUFNBd0xqazFMQ0JrWVhSaElEMGdZMnhsWVc1bFpGOWxiV0ZwYkY5amMzWXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbnQudGVzdChvcGVuX3JhdGUgfiBncm91cCwgYWx0ZXJuYXRpdmUgPSBcInR3by5zaWRlZFwiLCBjb25mLmxldmVsID0gMC45NSwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KG9wZW5fcmF0ZSB+IGdyb3VwLCBhbHRlcm5hdGl2ZSA9IFwidHdvLnNpZGVkXCIsIGNvbmYubGV2ZWwgPSAwLjk1LCBkYXRhID0gY2xlYW5lZF9lbWFpbF9jc3YpXG5gYGAifQ== -->
+<pre class="r"><code>t.test(open_rate ~ group, alternative = &quot;two.sided&quot;, conf.level = 0.95, data = cleaned_email_csv)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdFdlbGNoIFR3byBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBvcGVuX3JhdGUgYnkgZ3JvdXBcbnQgPSAtMi41MzU4LCBkZiA9IDc0LjA1MywgcC12YWx1ZVxuPSAwLjAxMzMzXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIGRpZmZlcmVuY2UgaW4gbWVhbnMgYmV0d2VlbiBncm91cCBHcm91cCBBIGFuZCBncm91cCBHcm91cCBCIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gLTAuMDgyMTA5MjQ0IC0wLjAwOTg1MTQxOFxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gaW4gZ3JvdXAgR3JvdXAgQSBcbiAgICAgICAgICAgMC4wODQzMjQ4NyBcbm1lYW4gaW4gZ3JvdXAgR3JvdXAgQiBcbiAgICAgICAgICAgMC4xMzAzMDUyMCBcbiJ9 -->
+<pre><code>
+    Welch Two Sample t-test
+
+data:  open_rate by group
+t = -2.5358, df = 74.053, p-value
+= 0.01333
+alternative hypothesis: true difference in means between group Group A and group Group B is not equal to 0
+95 percent confidence interval:
+ -0.082109244 -0.009851418
+sample estimates:
+mean in group Group A 
+           0.08432487 
+mean in group Group B 
+           0.13030520 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <p>calculate the mean value for click rate based on tone (conversational
 vs alarming)</p>
 <!-- rnb-text-end -->
@@ -1950,6 +2000,50 @@ vs alarming)</p>
   </script>
 </div>
 <!-- rnb-frame-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>regarding click rate, we recieved a p value of 0.61. since our p
+value is greater than our significance level, we do not have enough
+evidence to conclude there is signficiant variance between the two
+groups</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR1YyWlc1bFZHVnpkQ2hqYkdsamExOXlZWFJsSUg0Z1ozSnZkWEFzSUdSaGRHRWdQU0JqYkdWaGJtVmtYMlZ0WVdsc1gyTnpkaWxjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbmxldmVuZVRlc3QoY2xpY2tfcmF0ZSB+IGdyb3VwLCBkYXRhID0gY2xlYW5lZF9lbWFpbF9jc3YpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGV2ZW5lVGVzdChjbGlja19yYXRlIH4gZ3JvdXAsIGRhdGEgPSBjbGVhbmVkX2VtYWlsX2NzdilcbmBgYCJ9 -->
+<pre class="r"><code>leveneTest(click_rate ~ group, data = cleaned_email_csv)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGV2ZW5lJ3MgVGVzdCBmb3IgSG9tb2dlbmVpdHkgb2YgVmFyaWFuY2UgKGNlbnRlciA9IG1lZGlhbilcbiAgICAgIERmIEYgdmFsdWUgUHIoPkYpXG5ncm91cCAgMSAgMC4xOTMxIDAuNjYxNFxuICAgICAgOTIgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code>Levene&#39;s Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1  0.1931 0.6614
+      92               </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVkQzUwWlhOMEtHTnNhV05yWDNKaGRHVWdmaUJuY205MWNDd2dZV3gwWlhKdVlYUnBkbVVnUFNCY0luUjNieTV6YVdSbFpGd2lMQ0JqYjI1bUxteGxkbVZzSUQwZ01DNDVOU3dnZG1GeUxtVnhkV0ZzSUQwZ1ZGSlZSU3dnWkdGMFlTQTlJR05zWldGdVpXUmZaVzFoYVd4ZlkzTjJLU0JjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbnQudGVzdChjbGlja19yYXRlIH4gZ3JvdXAsIGFsdGVybmF0aXZlID0gXCJ0d28uc2lkZWRcIiwgY29uZi5sZXZlbCA9IDAuOTUsIHZhci5lcXVhbCA9IFRSVUUsIGRhdGEgPSBjbGVhbmVkX2VtYWlsX2NzdikgXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KGNsaWNrX3JhdGUgfiBncm91cCwgYWx0ZXJuYXRpdmUgPSBcInR3by5zaWRlZFwiLCBjb25mLmxldmVsID0gMC45NSwgdmFyLmVxdWFsID0gVFJVRSwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KSBcbmBgYCJ9 -->
+<pre class="r"><code>t.test(click_rate ~ group, alternative = &quot;two.sided&quot;, conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdFR3byBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBjbGlja19yYXRlIGJ5IGdyb3VwXG50ID0gMS44ODEzLCBkZiA9IDkyLCBwLXZhbHVlID1cbjAuMDYzMDlcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgZGlmZmVyZW5jZSBpbiBtZWFucyBiZXR3ZWVuIGdyb3VwIEdyb3VwIEEgYW5kIGdyb3VwIEdyb3VwIEIgaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAtMC4wMDA1NTcyNjE3ICAwLjAyMDU3NDgyMDJcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIGluIGdyb3VwIEdyb3VwIEEgXG4gICAgICAgICAgIDAuMDQyMTI5NzYgXG5tZWFuIGluIGdyb3VwIEdyb3VwIEIgXG4gICAgICAgICAgIDAuMDMyMTIwOTggXG4ifQ== -->
+<pre><code>
+    Two Sample t-test
+
+data:  click_rate by group
+t = 1.8813, df = 92, p-value =
+0.06309
+alternative hypothesis: true difference in means between group Group A and group Group B is not equal to 0
+95 percent confidence interval:
+ -0.0005572617  0.0205748202
+sample estimates:
+mean in group Group A 
+           0.04212976 
+mean in group Group B 
+           0.03212098 </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1981,9 +2075,51 @@ NA</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>regarding open to click rate, we recieved a p value of 0.71. since
+our p value is greater than our significance level 0.71 &gt; 0.05, there
+is not enough evidence to claim that there is variance between the two
+groups</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR1YyWlc1bFZHVnpkQ2h2Y0dWdVgzUnZYMk5zYVdOclgzSmhkR1VnZmlCbmNtOTFjQ3dnWkdGMFlTQTlJR05zWldGdVpXUmZaVzFoYVd4ZlkzTjJLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbmxldmVuZVRlc3Qob3Blbl90b19jbGlja19yYXRlIH4gZ3JvdXAsIGRhdGEgPSBjbGVhbmVkX2VtYWlsX2NzdilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGV2ZW5lVGVzdChvcGVuX3RvX2NsaWNrX3JhdGUgfiBncm91cCwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KVxuYGBgIn0= -->
+<pre class="r"><code>leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGV2ZW5lJ3MgVGVzdCBmb3IgSG9tb2dlbmVpdHkgb2YgVmFyaWFuY2UgKGNlbnRlciA9IG1lZGlhbilcbiAgICAgIERmIEYgdmFsdWUgUHIoPkYpXG5ncm91cCAgMSAgMC4xMzQ0IDAuNzE0N1xuICAgICAgODkgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code>Levene&#39;s Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1  0.1344 0.7147
+      89               </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVkQzUwWlhOMEtHOXdaVzVmZEc5ZlkyeHBZMnRmY21GMFpTQitJR2R5YjNWd0xDQmhiSFJsY201aGRHbDJaU0E5SUZ3aWRIZHZMbk5wWkdWa1hDSXNJR052Ym1ZdWJHVjJaV3dnUFNBd0xqazFMQ0IyWVhJdVpYRjFZV3dnUFNCVVVsVkZMQ0JrWVhSaElEMGdZMnhsWVc1bFpGOWxiV0ZwYkY5amMzWXBJRnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbnQudGVzdChvcGVuX3RvX2NsaWNrX3JhdGUgfiBncm91cCwgYWx0ZXJuYXRpdmUgPSBcInR3by5zaWRlZFwiLCBjb25mLmxldmVsID0gMC45NSwgdmFyLmVxdWFsID0gVFJVRSwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KSBcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KG9wZW5fdG9fY2xpY2tfcmF0ZSB+IGdyb3VwLCBhbHRlcm5hdGl2ZSA9IFwidHdvLnNpZGVkXCIsIGNvbmYubGV2ZWwgPSAwLjk1LCB2YXIuZXF1YWwgPSBUUlVFLCBkYXRhID0gY2xlYW5lZF9lbWFpbF9jc3YpIFxuYGBgIn0= -->
+<pre class="r"><code>t.test(open_to_click_rate ~ group, alternative = &quot;two.sided&quot;, conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdFR3byBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBvcGVuX3RvX2NsaWNrX3JhdGUgYnkgZ3JvdXBcbnQgPSAyLjc5MzIsIGRmID0gODksIHAtdmFsdWUgPVxuMC4wMDYzODlcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgZGlmZmVyZW5jZSBpbiBtZWFucyBiZXR3ZWVuIGdyb3VwIEdyb3VwIEEgYW5kIGdyb3VwIEdyb3VwIEIgaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjA2NDY2MjA2IDAuMzgzMzgwMThcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIGluIGdyb3VwIEdyb3VwIEEgXG4gICAgICAgICAgICAwLjYxNTM0OTggXG5tZWFuIGluIGdyb3VwIEdyb3VwIEIgXG4gICAgICAgICAgICAwLjM5MTMyODcgXG4ifQ== -->
+<pre><code>
+    Two Sample t-test
+
+data:  open_to_click_rate by group
+t = 2.7932, df = 89, p-value =
+0.006389
+alternative hypothesis: true difference in means between group Group A and group Group B is not equal to 0
+95 percent confidence interval:
+ 0.06466206 0.38338018
+sample estimates:
+mean in group Group A 
+            0.6153498 
+mean in group Group B 
+            0.3913287 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2plY3QyIFRlY2huaWNhbCBOb3RlYm9vayINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpsb2FkIGluIHRpZHl2ZXJzZSBsaWJyYXJ5IA0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KcmVhZCBpbiB0aGUgZW1haWwgbWV0cmljcyBjc3YgDQpgYGB7cn0NCmVtYWlsX2NzdiA8LSByZWFkX2NzdigiZGF0YS9lbWFpbF9tZXRyaWNzLmNzdiIpDQoNCmBgYA0KcmVhZCBpbiB0aGUgbGFzdCBlbWFpbCBiZWZvcmUgb3JkZXIgY3N2IA0KYGBge3J9DQpsYXN0X2VtYWlsX2NzdiA8LSByZWFkX2NzdigiZGF0YS9sYXN0X2VtYWlsX2JlZm9yZV9vcmRlci5jc3YiKQ0KYGBgDQp3ZSBjYW4gc2VlIHRoYXQgdGhlIGNvbHVtbnMgb2YgZ3JvdXAgYW5kIGdyb3VwIGNvZGUgYXJlIE5PVCB0aGUgc2FtZSB0aGluZzsgZ3JvdXAgc3BlY2lmaWVzIHRoZSBnZW5lcmFsIGNhdGVnb3J5IChjb252ZXJzYXRpb25hbCBhcHByb2FjaCB2cyBkaXJlY3QpIHdoZXJlYXMgZ3JvdXBfY29kZSBoYXMgc3ViY2F0ZWdvcmllcyB3aXRoaW4gZWFjaCBhcHByb2FjaC4gMCAyIGFuZCA0IGxpa2VseSBjb3JyZXNwb25kIHRvIHRoZSBkYXlzIG9mIHRoZSB3ZWVrIChtb24sIHdlZCwgZnJpKSB0aGUgZW1haWxzIHdlcmUgc2VudCANCg0KYGBge3J9DQpkaXN0aW5jdChlbWFpbF9jc3YsIGdyb3VwLCBncm91cF9jb2RlKQ0KYGBgDQpjcmVhdGUgY29weSBvZiBvcmlnaW5hbCBlbWFpbCBtZW50cmljcyBkYXRhc2V0ICB0byBwcmVzZXJ2ZSBvcmlnaW5hbCB2ZXJzaW9uDQpgYGB7cn0NCmNsZWFuZWRfZW1haWxfY3N2IDwtIGVtYWlsX2NzdiANCg0KYGBgDQoNCmRvIHRoZSBzYW1lIGZvciBsYXN0X2VtYWlsX3NlbnQgZGF0YXNldCANCg0KYGBge3J9DQpjbGVhbmVkX2xhc3RfZW1haWxfY3N2IDwtIGxhc3RfZW1haWxfY3N2DQpgYGANCg0KYmFzZWQgb24gZmluZGluZ3MsIGR1ZSB0byB0aGUgY29sdW1uIG51bWJlcl9vcmRlcmVkIG5vdCBoYXZpbmcgYSBzaW5nbGUgaW5zdGFuY2Ugb2YgMCBvcmRlcnMgcGxhY2VkLCB3ZSBjYW4gaW50ZXJwcmV0IE5BIGFzIHRoZXJlIGJlaW5nIDAgb3JkZXJzIA0KDQpgYGB7cn0NCmNsZWFuZWRfZW1haWxfY3N2JG51bWJlcl9vcmRlcnNbaXMubmEoY2xlYW5lZF9lbWFpbF9jc3YkbnVtYmVyX29yZGVycyldIDwtIDANCmBgYA0KDQp3ZSBjYW4gcmVtb3ZlIHRoZSAuLi4xIGNvbHVtbiBhcyBpdCBpcyBqdXN0IHRoZSByb3cgaW5kZXggDQoNCmBgYHtyfQ0KY2xlYW5lZF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9lbWFpbF9jc3YgJT4lIA0KICBzZWxlY3QoLWAuLi4xYCkNCmBgYA0KDQpgYGB7cn0NCmNsZWFuZWRfbGFzdF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9sYXN0X2VtYWlsX2NzdiAlPiUNCiAgc2VsZWN0KC1gLi4uMWApDQpgYGANCg0KZW5zdXJlIHRoYXQgdGhlcmUgaXNudCBhIGluc3RhbmNlIG9mIHRoZXJlIGJlaW5nIDAgZW1haWxzIHNlbnQgLSB0aGVyZSBpcyBmb3IgbnVtYmVyX29wZW5zIGFsdGhvdWdoIHdlIGNhbiBsZWF2ZSB0aGlzIGFzIE5hTiBiZWNhdXNlIDAgb3BlbnMgbWVhbnMgdGhlIGVtYWlsIGl0c2VsZiB3YXMgbmV2ZXIgaW50ZXJhY3RlZCB3aXRoIGJ5IGEgdXNlciANCmBgYHtyfQ0KYW55KGNsZWFuZWRfZW1haWxfY3N2JGVtYWlsc19zZW50ID09IDApDQphbnkoY2xlYW5lZF9lbWFpbF9jc3YkbnVtYmVyX29wZW5zID09IDApDQpgYGANCmNyZWF0ZSBjYWxjdWxhdGVkIGZpZWxkIGNvbHVtbnMgdGhhdCBtZWFzdXJlcyBvcGVuIHJhdGUsIGNsaWNrIHJhdGUsIG9wZW4gdG8gY2xpY2sgcmF0ZSwgdW5zdWIgcmF0ZSwgYW5kIG9yZGVyIHJhdGUgDQoNCmBgYHtyfQ0KY2xlYW5lZF9lbWFpbF9jc3YgPC0gY2xlYW5lZF9lbWFpbF9jc3YgJT4lIA0KICBtdXRhdGUob3Blbl9yYXRlID0gKG51bWJlcl9vcGVucyAvIGVtYWlsc19zZW50KSwNCiAgICAgICAgIGNsaWNrX3JhdGUgPSAobnVtYmVyX2NsaWNrcyAvIGVtYWlsc19zZW50KSwNCiAgICAgICAgIG9wZW5fdG9fY2xpY2tfcmF0ZSA9IChudW1iZXJfY2xpY2tzIC8gbnVtYmVyX29wZW5zKSwNCiAgICAgICAgIHVuc3Vic2NyaWJlX3JhdGUgPSAobnVtYmVyX3Vuc3ViIC8gZW1haWxzX3NlbnQpLA0KICAgICAgICAgb3JkZXJfcmF0ZSA9IChudW1iZXJfb3JkZXJzIC8gZW1haWxzX3NlbnQpDQogICkNCiAgICAgICAgIA0KDQpgYGANCg0KDQpjYWxjdWxhdGUgdGhlIG1lYW4gdmFsdWUgYmFzZWQgb24gdG9uZSBmb3Igb3BlbiByYXRlIChjb252ZXJzYXRpb25hbCB2cyBhbGFybWluZykgDQpgYGB7cn0NCg0KY2xlYW5lZF9lbWFpbF9jc3YgJT4lIA0KICBncm91cF9ieShncm91cCkgJT4lIA0KICBzdW1tYXJpc2UobWVhbl92YWwgPSBtZWFuKG9wZW5fcmF0ZSwgbmEucm0gPSBUUlVFKSkNCg0KYGBgDQoNCg0KY2FsY3VsYXRlIHRoZSBtZWFuIHZhbHVlIGZvciBjbGljayByYXRlIGJhc2VkIG9uIHRvbmUgKGNvbnZlcnNhdGlvbmFsIHZzIGFsYXJtaW5nKQ0KYGBge3J9DQpjbGVhbmVkX2VtYWlsX2NzdiAlPiUgDQogIGdyb3VwX2J5KGdyb3VwKSAlPiUNCiAgc3VtbWFyaXNlKG1lYW5fdmFsID0gbWVhbihjbGlja19yYXRlLCBuYS5ybSA9IFRSVUUpKQ0KYGBgDQoNCg0KY2FsY3VsYXRlIHRoZSBtZWFuIHZhbHVlIGZvciBjbGljayB0byBvcGVuIHJhdGUgYmFzZWQgb24gdG9uZSAoY29udmVyc2F0aW9uYWwgdnMgYWxhcm1pbmcpIA0KYGBge3J9DQpjbGVhbmVkX2VtYWlsX2NzdiAlPiUgDQogIGdyb3VwX2J5KGdyb3VwKSAlPiUNCiAgc3VtbWFyaXNlKG1lYW5fdmFsID0gbWVhbihvcGVuX3RvX2NsaWNrX3JhdGUsIG5hLnJtID0gVFJVRSkpDQoNCg0KYGBgDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2plY3QyIFRlY2huaWNhbCBOb3RlYm9vayINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpsb2FkIGluIHRpZHl2ZXJzZSBhbmQgIGxpYnJhcmllcyBuZWVkZWQgZm9yIHN0YXRpc3RpY2FsIHRlc3RzDQpgYGB7cn0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShwd3IpDQpsaWJyYXJ5KGNhcikNCmxpYnJhcnkoZWZmZWN0c2l6ZSkNCmBgYA0KDQpyZWFkIGluIHRoZSBlbWFpbCBtZXRyaWNzIGNzdiANCmBgYHtyfQ0KZW1haWxfY3N2IDwtIHJlYWRfY3N2KCJkYXRhL2VtYWlsX21ldHJpY3MuY3N2IikNCg0KYGBgDQpyZWFkIGluIHRoZSBsYXN0IGVtYWlsIGJlZm9yZSBvcmRlciBjc3YgDQpgYGB7cn0NCmxhc3RfZW1haWxfY3N2IDwtIHJlYWRfY3N2KCJkYXRhL2xhc3RfZW1haWxfYmVmb3JlX29yZGVyLmNzdiIpDQpgYGANCndlIGNhbiBzZWUgdGhhdCB0aGUgY29sdW1ucyBvZiBncm91cCBhbmQgZ3JvdXAgY29kZSBhcmUgTk9UIHRoZSBzYW1lIHRoaW5nOyBncm91cCBzcGVjaWZpZXMgdGhlIGdlbmVyYWwgY2F0ZWdvcnkgKGNvbnZlcnNhdGlvbmFsIGFwcHJvYWNoIHZzIGRpcmVjdCkgd2hlcmVhcyBncm91cF9jb2RlIGhhcyBzdWJjYXRlZ29yaWVzIHdpdGhpbiBlYWNoIGFwcHJvYWNoLiAwIDIgYW5kIDQgbGlrZWx5IGNvcnJlc3BvbmQgdG8gdGhlIGRheXMgb2YgdGhlIHdlZWsgKG1vbiwgd2VkLCBmcmkpIHRoZSBlbWFpbHMgd2VyZSBzZW50IA0KDQpgYGB7cn0NCmRpc3RpbmN0KGVtYWlsX2NzdiwgZ3JvdXAsIGdyb3VwX2NvZGUpDQpgYGANCmNyZWF0ZSBjb3B5IG9mIG9yaWdpbmFsIGVtYWlsIG1lbnRyaWNzIGRhdGFzZXQgIHRvIHByZXNlcnZlIG9yaWdpbmFsIHZlcnNpb24NCmBgYHtyfQ0KY2xlYW5lZF9lbWFpbF9jc3YgPC0gZW1haWxfY3N2IA0KDQpgYGANCg0KZG8gdGhlIHNhbWUgZm9yIGxhc3RfZW1haWxfc2VudCBkYXRhc2V0IA0KDQpgYGB7cn0NCmNsZWFuZWRfbGFzdF9lbWFpbF9jc3YgPC0gbGFzdF9lbWFpbF9jc3YNCmBgYA0KDQpiYXNlZCBvbiBmaW5kaW5ncywgZHVlIHRvIHRoZSBjb2x1bW4gbnVtYmVyX29yZGVyZWQgbm90IGhhdmluZyBhIHNpbmdsZSBpbnN0YW5jZSBvZiAwIG9yZGVycyBwbGFjZWQsIHdlIGNhbiBpbnRlcnByZXQgTkEgYXMgdGhlcmUgYmVpbmcgMCBvcmRlcnMgDQoNCmBgYHtyfQ0KY2xlYW5lZF9lbWFpbF9jc3YkbnVtYmVyX29yZGVyc1tpcy5uYShjbGVhbmVkX2VtYWlsX2NzdiRudW1iZXJfb3JkZXJzKV0gPC0gMA0KYGBgDQoNCndlIGNhbiByZW1vdmUgdGhlIC4uLjEgY29sdW1uIGFzIGl0IGlzIGp1c3QgdGhlIHJvdyBpbmRleCANCg0KYGBge3J9DQpjbGVhbmVkX2VtYWlsX2NzdiA8LSBjbGVhbmVkX2VtYWlsX2NzdiAlPiUgDQogIHNlbGVjdCgtYC4uLjFgKQ0KYGBgDQoNCmBgYHtyfQ0KY2xlYW5lZF9sYXN0X2VtYWlsX2NzdiA8LSBjbGVhbmVkX2xhc3RfZW1haWxfY3N2ICU+JQ0KICBzZWxlY3QoLWAuLi4xYCkNCmBgYA0KDQplbnN1cmUgdGhhdCB0aGVyZSBpc250IGEgaW5zdGFuY2Ugb2YgdGhlcmUgYmVpbmcgMCBlbWFpbHMgc2VudCAtIHRoZXJlIGlzIGZvciBudW1iZXJfb3BlbnMgYWx0aG91Z2ggd2UgY2FuIGxlYXZlIHRoaXMgYXMgTmFOIGJlY2F1c2UgMCBvcGVucyBtZWFucyB0aGUgZW1haWwgaXRzZWxmIHdhcyBuZXZlciBpbnRlcmFjdGVkIHdpdGggYnkgYSB1c2VyIA0KYGBge3J9DQphbnkoY2xlYW5lZF9lbWFpbF9jc3YkZW1haWxzX3NlbnQgPT0gMCkNCmFueShjbGVhbmVkX2VtYWlsX2NzdiRudW1iZXJfb3BlbnMgPT0gMCkNCmBgYA0KY3JlYXRlIGNhbGN1bGF0ZWQgZmllbGQgY29sdW1ucyB0aGF0IG1lYXN1cmVzIG9wZW4gcmF0ZSwgY2xpY2sgcmF0ZSwgb3BlbiB0byBjbGljayByYXRlLCB1bnN1YiByYXRlLCBhbmQgb3JkZXIgcmF0ZSANCg0KYGBge3J9DQpjbGVhbmVkX2VtYWlsX2NzdiA8LSBjbGVhbmVkX2VtYWlsX2NzdiAlPiUgDQogIG11dGF0ZShvcGVuX3JhdGUgPSAobnVtYmVyX29wZW5zIC8gZW1haWxzX3NlbnQpLA0KICAgICAgICAgY2xpY2tfcmF0ZSA9IChudW1iZXJfY2xpY2tzIC8gZW1haWxzX3NlbnQpLA0KICAgICAgICAgb3Blbl90b19jbGlja19yYXRlID0gKG51bWJlcl9jbGlja3MgLyBudW1iZXJfb3BlbnMpLA0KICAgICAgICAgdW5zdWJzY3JpYmVfcmF0ZSA9IChudW1iZXJfdW5zdWIgLyBlbWFpbHNfc2VudCksDQogICAgICAgICBvcmRlcl9yYXRlID0gKG51bWJlcl9vcmRlcnMgLyBlbWFpbHNfc2VudCkNCiAgKQ0KICAgICAgICAgDQoNCmBgYA0KDQoNCmNhbGN1bGF0ZSB0aGUgbWVhbiB2YWx1ZSBiYXNlZCBvbiB0b25lIGZvciBvcGVuIHJhdGUgKGNvbnZlcnNhdGlvbmFsIHZzIGFsYXJtaW5nKSANCmBgYHtyfQ0KDQpjbGVhbmVkX2VtYWlsX2NzdiAlPiUgDQogIGdyb3VwX2J5KGdyb3VwKSAlPiUgDQogIHN1bW1hcmlzZShtZWFuX3ZhbCA9IG1lYW4ob3Blbl9yYXRlLCBuYS5ybSA9IFRSVUUpKQ0KDQpgYGANCg0KcnVubmluZyB0aGUgbGV2ZW4ncyB0ZXN0IGJhc2VkIG9uIHRvbmUgIGFuZCB0aGUgb3BlbiByYXRlLCB3ZSByZWNpZXZlIGEgcCB2YWx1ZSBvZiAgMC4wMDE1LiBvdXIgc2lnbmZpaWNhbmNlIHJhdGUgaXMgMC4wNS4gQXMgMC4wMDE1IDwgMC4wNSwgd2UgY2FuIGFzc3VtZSB0aGF0IHRoZXJlIGlzIGVub3VnaCBldmlkZW5jZSB0aGF0IHRoZSBncm91cCB2YXJpYW5jZXMgYmV0d2VlbiBncm91cCBBIGFuZCBCIGFyZSBkaWZmZXJlbnQgYW5kIHdlIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzLg0KYGBge3J9DQpsZXZlbmVUZXN0KG9wZW5fcmF0ZSB+IGdyb3VwLCBkYXRhID0gY2xlYW5lZF9lbWFpbF9jc3YpDQpgYGANCmBgYHtyfQ0KdC50ZXN0KG9wZW5fcmF0ZSB+IGdyb3VwLCBhbHRlcm5hdGl2ZSA9ICJ0d28uc2lkZWQiLCBjb25mLmxldmVsID0gMC45NSwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KQ0KYGBgDQoNCmNhbGN1bGF0ZSB0aGUgbWVhbiB2YWx1ZSBmb3IgY2xpY2sgcmF0ZSBiYXNlZCBvbiB0b25lIChjb252ZXJzYXRpb25hbCB2cyBhbGFybWluZykNCmBgYHtyfQ0KY2xlYW5lZF9lbWFpbF9jc3YgJT4lIA0KICBncm91cF9ieShncm91cCkgJT4lDQogIHN1bW1hcmlzZShtZWFuX3ZhbCA9IG1lYW4oY2xpY2tfcmF0ZSwgbmEucm0gPSBUUlVFKSkNCmBgYA0KDQpyZWdhcmRpbmcgIGNsaWNrIHJhdGUsIHdlIHJlY2lldmVkIGEgcCB2YWx1ZSBvZiAwLjYxLiBzaW5jZSBvdXIgcCB2YWx1ZSBpcyBncmVhdGVyIHRoYW4gb3VyIHNpZ25pZmljYW5jZSBsZXZlbCwgd2UgZG8gbm90IGhhdmUgZW5vdWdoIGV2aWRlbmNlIHRvIGNvbmNsdWRlIHRoZXJlIGlzIHNpZ25maWNpYW50IHZhcmlhbmNlIGJldHdlZW4gdGhlIHR3byBncm91cHMgDQoNCmBgYHtyfQ0KbGV2ZW5lVGVzdChjbGlja19yYXRlIH4gZ3JvdXAsIGRhdGEgPSBjbGVhbmVkX2VtYWlsX2NzdikNCmBgYA0KDQpgYGB7cn0NCnQudGVzdChjbGlja19yYXRlIH4gZ3JvdXAsIGFsdGVybmF0aXZlID0gInR3by5zaWRlZCIsIGNvbmYubGV2ZWwgPSAwLjk1LCB2YXIuZXF1YWwgPSBUUlVFLCBkYXRhID0gY2xlYW5lZF9lbWFpbF9jc3YpIA0KYGBgDQoNCg0KY2FsY3VsYXRlIHRoZSBtZWFuIHZhbHVlIGZvciBjbGljayB0byBvcGVuIHJhdGUgYmFzZWQgb24gdG9uZSAoY29udmVyc2F0aW9uYWwgdnMgYWxhcm1pbmcpIA0KYGBge3J9DQpjbGVhbmVkX2VtYWlsX2NzdiAlPiUgDQogIGdyb3VwX2J5KGdyb3VwKSAlPiUNCiAgc3VtbWFyaXNlKG1lYW5fdmFsID0gbWVhbihvcGVuX3RvX2NsaWNrX3JhdGUsIG5hLnJtID0gVFJVRSkpDQoNCg0KYGBgDQpyZWdhcmRpbmcgb3BlbiB0byBjbGljayByYXRlLCB3ZSByZWNpZXZlZCBhIHAgdmFsdWUgb2YgMC43MS4gc2luY2Ugb3VyIHAgdmFsdWUgaXMgZ3JlYXRlciB0aGFuIG91ciBzaWduaWZpY2FuY2UgbGV2ZWwgMC43MSA+IDAuMDUsIHRoZXJlIGlzIG5vdCBlbm91Z2ggZXZpZGVuY2UgdG8gY2xhaW0gdGhhdCB0aGVyZSBpcyB2YXJpYW5jZSBiZXR3ZWVuIHRoZSB0d28gZ3JvdXBzDQoNCmBgYHtyfQ0KbGV2ZW5lVGVzdChvcGVuX3RvX2NsaWNrX3JhdGUgfiBncm91cCwgZGF0YSA9IGNsZWFuZWRfZW1haWxfY3N2KQ0KYGBgDQpgYGB7cn0NCnQudGVzdChvcGVuX3RvX2NsaWNrX3JhdGUgfiBncm91cCwgYWx0ZXJuYXRpdmUgPSAidHdvLnNpZGVkIiwgY29uZi5sZXZlbCA9IDAuOTUsIHZhci5lcXVhbCA9IFRSVUUsIGRhdGEgPSBjbGVhbmVkX2VtYWlsX2NzdikgDQpgYGANCg0KDQoNCg0KDQo=</div>
 
 
 

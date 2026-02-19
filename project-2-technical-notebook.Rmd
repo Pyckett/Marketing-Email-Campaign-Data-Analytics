@@ -2,10 +2,14 @@
 title: "Project2 Technical Notebook"
 output: html_notebook
 ---
-load in tidyverse library 
+load in tidyverse and  libraries needed for statistical tests
 ```{r}
 library(tidyverse)
+library(pwr)
+library(car)
+library(effectsize)
 ```
+
 read in the email metrics csv 
 ```{r}
 email_csv <- read_csv("data/email_metrics.csv")
@@ -79,12 +83,29 @@ cleaned_email_csv %>%
 
 ```
 
+running the leven's test based on tone  and the open rate, we recieve a p value of  0.0015. our signfiicance rate is 0.05. As 0.0015 < 0.05, we can assume that there is enough evidence that the group variances between group A and B are different and we reject the null hypothesis.
+```{r}
+leveneTest(open_rate ~ group, data = cleaned_email_csv)
+```
+```{r}
+t.test(open_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
+```
 
 calculate the mean value for click rate based on tone (conversational vs alarming)
 ```{r}
 cleaned_email_csv %>% 
   group_by(group) %>%
   summarise(mean_val = mean(click_rate, na.rm = TRUE))
+```
+
+regarding  click rate, we recieved a p value of 0.61. since our p value is greater than our significance level, we do not have enough evidence to conclude there is signficiant variance between the two groups 
+
+```{r}
+leveneTest(click_rate ~ group, data = cleaned_email_csv)
+```
+
+```{r}
+t.test(click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
 ```
 
 
@@ -96,5 +117,16 @@ cleaned_email_csv %>%
 
 
 ```
+regarding open to click rate, we recieved a p value of 0.71. since our p value is greater than our significance level 0.71 > 0.05, there is not enough evidence to claim that there is variance between the two groups
+
+```{r}
+leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)
+```
+```{r}
+t.test(open_to_click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
+```
+
+
+
 
 
