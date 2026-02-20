@@ -87,9 +87,31 @@ running the leven's test based on tone  and the open rate, we recieve a p value 
 ```{r}
 leveneTest(open_rate ~ group, data = cleaned_email_csv)
 ```
+due to the results of  our p value being smaller than our significance level, we run a welch test 
 ```{r}
 t.test(open_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
 ```
+create sample of data, group by tone, and categorize two variables of the avg open rate and standard deviation for open rate 
+```{r}
+openRate <- cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(AvgOpens = mean(open_rate), SdOpens = sd(open_rate))
+```
+
+plot tone on x axis, avg open rate as the y axis, and differentiate by tone. then create two summary statistics of both the avg open rate, and standard deviation of open rate
+
+```{r}
+ggplot(openRate, aes(x = group, 
+                     y = AvgOpens,
+                     fill = group)) +
+                    labs(title = "Average Open Rate of Emails Based on Tone ",
+                       x = "Tone",
+                       y = "Open Rate",
+                       fill = "Tone") +
+  geom_col() + 
+  geom_errorbar(aes(ymin = AvgOpens - SdOpens, ymax = AvgOpens + SdOpens)) + scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) + scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
+```
+
 
 calculate the mean value for click rate based on tone (conversational vs alarming)
 ```{r}
@@ -98,14 +120,18 @@ cleaned_email_csv %>%
   summarise(mean_val = mean(click_rate, na.rm = TRUE))
 ```
 
-regarding  click rate, we recieved a p value of 0.61. since our p value is greater than our significance level, we do not have enough evidence to conclude there is signficiant variance between the two groups 
+regarding  click rate, we recieved a p value of 0.66. since our p value is greater than our significance level 0.66 > 0.05,  we do not have enough evidence to conclude there is signficiant variance between the two groups 
 
 ```{r}
 leveneTest(click_rate ~ group, data = cleaned_email_csv)
 ```
 
+
 ```{r}
 t.test(click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
+```
+```{r}
+
 ```
 
 
@@ -125,8 +151,26 @@ leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)
 ```{r}
 t.test(open_to_click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
 ```
+```{r}
+open_to_click_rate_graph <- cleaned_email_csv %>%
+  filter(!is.nan(open_to_click_rate)) %>% 
+  group_by(group) %>% 
+  summarise(AvgOpenClickRate = mean(open_to_click_rate), StdOpenClickRate = sd(open_to_click_rate)) 
+```
 
 
+```{r}
+ggplot(open_to_click_rate_graph, aes(x = group, y = AvgOpenClickRate, fill = group)) + 
+  labs(title = "Average Open to Click Rate of Emails Based on Tone",
+       x = "Tone",
+       y = "Open to Click Rate",
+       fill = "Tone") + 
+  geom_col() + 
+  geom_errorbar(aes(ymin = AvgOpenClickRate - StdOpenClickRate, ymax = AvgOpenClickRate + StdOpenClickRate)) + 
+  scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
+
+```
 
 
 
