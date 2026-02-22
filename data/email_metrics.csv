@@ -1,0 +1,95 @@
+,date_email_sent,group,group_code,email_subject,before_march,day_of_week,emails_sent,number_opens,number_clicks,number_unsub,number_orders
+0,2004-01-07,Group A,Group A,Welcome to 2004! Let’s Start the Year with a Bang,True,2,102.0,23.0,7.0,0.0,1.0
+1,2004-01-07,Group B,Group B,NEW YEAR’S BESTSELLERS: LIMITED STOCK AVAILABLE!,True,2,102.0,14.0,3.0,1.0,1.0
+2,2004-01-14,Group A,Group A,"Fresh Start, Fresh Models—Your Store Will Love These",True,2,102.0,16.0,5.0,0.0,2.0
+3,2004-01-14,Group B,Group B,DON’T WAIT: START THE YEAR WITH THESE HOT PICKS!,True,2,101.0,28.0,3.0,0.0,
+4,2004-01-21,Group A,Group A,Mid-January Refresh: Perfect Additions to Your Inventory,True,2,102.0,25.0,4.0,0.0,1.0
+5,2004-01-21,Group B,Group B,SELL FAST: JANUARY’S MOST POPULAR MODELS!,True,2,101.0,40.0,5.0,1.0,1.0
+6,2004-01-28,Group A,Group A,Your Weekly Check-In: What’s Missing from Your Shelves?,True,2,102.0,29.0,10.0,0.0,
+7,2004-01-28,Group B,Group B,URGENT: THESE MODELS ARE FLYING OFF THE SHELVES!,True,2,100.0,27.0,6.0,1.0,2.0
+8,2004-02-04,Group A,Group A,Valentine’s Day is Coming—Add a Little Love to Your Store,True,2,102.0,10.0,5.0,0.0,1.0
+9,2004-02-04,Group B,Group B,SELL OUT ALERT: VALENTINE’S DAY MUST-HAVES!,True,2,99.0,17.0,6.0,1.0,1.0
+10,2004-02-11,Group A,Group A,Last-Minute Valentine’s Day Picks for Your Store,True,2,102.0,11.0,8.0,0.0,
+11,2004-02-11,Group B,Group B,FINAL CALL: VALENTINE’S MODELS ALMOST GONE!,True,2,98.0,23.0,4.0,0.0,1.0
+12,2004-02-18,Group A,Group A,What’s Trending After Valentine’s? We’ve Got You Covered,True,2,102.0,21.0,4.0,0.0,2.0
+13,2004-02-18,Group B,Group B,NEW ARRIVALS: DON’T MISS THESE POST-VALENTINE’S FAVORITES!,True,2,98.0,42.0,3.0,3.0,3.0
+14,2004-02-25,Group A,Group A,February Favorites: Check Out Our Bestsellers This Month,True,2,102.0,12.0,5.0,1.0,1.0
+15,2004-02-25,Group B,Group B,TIME-SENSITIVE: LAST CHANCE FOR FEBRUARY’S HOTTEST PICKS!,True,2,95.0,25.0,5.0,1.0,1.0
+16,2004-03-03,Group A,Group A2,Spring is Coming! Refresh Your Shelves with These Picks,False,2,33.0,3.0,1.0,0.0,
+17,2004-03-03,Group B,Group B2,SPRING MODELS JUST IN: ORDER BEFORE THEY’RE GONE!,False,2,31.0,1.0,0.0,1.0,
+18,2004-03-10,Group A,Group A2,Weekly Spotlight: What Your Customers Will Love This Spring,False,2,33.0,1.0,1.0,0.0,1.0
+19,2004-03-10,Group B,Group B2,ACT NOW: SPRING BESTSELLERS FLYING OFF THE SHELVES!,False,2,30.0,1.0,1.0,1.0,
+20,2004-03-17,Group A,Group A2,Mid-March Marvels: Check Out These Customer Favorites,False,2,33.0,0.0,0.0,1.0,
+21,2004-03-17,Group B,Group B2,DON’T MISS OUT: MID-MARCH’S HOTTEST MODELS!,False,2,29.0,1.0,0.0,1.0,
+22,2004-03-24,Group A,Group A2,Fresh Finds for the New Season—See What’s in Stock,False,2,32.0,3.0,1.0,1.0,
+23,2004-03-24,Group B,Group B2,SPRING RUSH: LIMITED STOCK ALERT—ORDER NOW!,False,2,28.0,2.0,1.0,1.0,
+24,2004-03-31,Group A,Group A2,End of March Favorites: Your Customers Will Love These,False,2,31.0,4.0,1.0,0.0,1.0
+25,2004-03-31,Group B,Group B2,SELL OUT WARNING: MARCH BESTSELLERS RUNNING LOW!,False,2,27.0,1.0,1.0,1.0,
+26,2004-04-07,Group A,Group A2,April Showers Bring Bestsellers—Stock Up Now!,False,2,31.0,2.0,1.0,0.0,2.0
+27,2004-04-07,Group B,Group B2,LIMITED EDITION MODELS FOR APRIL: ORDER FAST!,False,2,26.0,3.0,0.0,1.0,
+28,2004-04-14,Group A,Group A2,Weekly Update: Must-Have Models for April Events,False,2,31.0,2.0,2.0,1.0,
+29,2004-04-14,Group B,Group B2,APRIL ESSENTIALS: DON’T LET THESE SELL OUT!,False,2,25.0,1.0,1.0,0.0,
+30,2004-04-21,Group A,Group A2,What’s Hot This Week? Find Out Here!,False,2,30.0,2.0,2.0,1.0,1.0
+31,2004-04-21,Group B,Group B2,URGENT: THIS WEEK’S TOP-SELLING MODELS!,False,2,25.0,1.0,0.0,1.0,
+32,2004-04-28,Group A,Group A2,Your April Favorites—Back in Stock!,False,2,29.0,1.0,1.0,0.0,
+33,2004-04-28,Group B,Group B2,BACK BY POPULAR DEMAND: ORDER NOW BEFORE IT’S GONE AGAIN!,False,2,24.0,1.0,1.0,1.0,
+34,2004-05-05,Group A,Group A2,Let’s Celebrate Moms and Dads with These Collectibles,False,2,29.0,2.0,0.0,0.0,2.0
+35,2004-05-05,Group B,Group B2,MOTHER’S & FATHER’S DAY ITEMS: DON’T WAIT TO STOCK UP!,False,2,23.0,0.0,0.0,1.0,
+36,2004-05-12,Group A,Group A2,Weekly Inspiration: Models Perfect for Father’s Day,False,2,29.0,1.0,1.0,0.0,
+37,2004-05-12,Group B,Group B2,LIMITED SUPPLY: FATHER’S DAY BESTSELLERS IN STOCK NOW!,False,2,22.0,2.0,0.0,1.0,
+38,2004-05-19,Group A,Group A2,What’s Trending This Week? See Our Latest Recommendations,False,2,29.0,1.0,1.0,0.0,
+39,2004-05-19,Group B,Group B2,TIME-SENSITIVE: THIS WEEK’S MUST-HAVE MODELS!,False,2,21.0,1.0,1.0,0.0,
+40,2004-05-26,Group A,Group A2,End of May: Perfect Picks for Summer Ahead,False,2,29.0,3.0,2.0,0.0,1.0
+41,2004-05-26,Group B,Group B2,SUMMER IS HERE: LAST CHANCE FOR MAY’S HOTTEST ITEMS!,False,2,21.0,3.0,1.0,1.0,
+42,2004-03-01,Group A,Group A0,Spring is Coming! Refresh Your Shelves with These Picks,False,0,33.0,1.0,1.0,0.0,
+43,2004-03-01,Group B,Group B0,SPRING MODELS JUST IN: ORDER BEFORE THEY’RE GONE!,False,0,31.0,2.0,1.0,1.0,1.0
+44,2004-03-08,Group A,Group A0,Weekly Spotlight: What Your Customers Will Love This Spring,False,0,33.0,1.0,1.0,1.0,
+45,2004-03-08,Group B,Group B0,ACT NOW: SPRING BESTSELLERS FLYING OFF THE SHELVES!,False,0,30.0,1.0,1.0,1.0,1.0
+46,2004-03-15,Group A,Group A0,Mid-March Marvels: Check Out These Customer Favorites,False,0,32.0,2.0,2.0,0.0,
+47,2004-03-15,Group B,Group B0,DON’T MISS OUT: MID-MARCH’S HOTTEST MODELS!,False,0,29.0,6.0,2.0,2.0,1.0
+48,2004-03-22,Group A,Group A0,Fresh Finds for the New Season—See What’s in Stock,False,0,32.0,2.0,2.0,0.0,
+49,2004-03-22,Group B,Group B0,SPRING RUSH: LIMITED STOCK ALERT—ORDER NOW!,False,0,27.0,5.0,0.0,1.0,
+50,2004-03-29,Group A,Group A0,End of March Favorites: Your Customers Will Love These,False,0,32.0,2.0,2.0,0.0,
+51,2004-03-29,Group B,Group B0,SELL OUT WARNING: MARCH BESTSELLERS RUNNING LOW!,False,0,26.0,4.0,0.0,0.0,
+52,2004-04-05,Group A,Group A0,April Showers Bring Bestsellers—Stock Up Now!,False,0,32.0,3.0,1.0,1.0,
+53,2004-04-05,Group B,Group B0,LIMITED EDITION MODELS FOR APRIL: ORDER FAST!,False,0,26.0,5.0,0.0,1.0,1.0
+54,2004-04-12,Group A,Group A0,Weekly Update: Must-Have Models for April Events,False,0,31.0,2.0,1.0,0.0,
+55,2004-04-12,Group B,Group B0,APRIL ESSENTIALS: DON’T LET THESE SELL OUT!,False,0,25.0,5.0,0.0,0.0,
+56,2004-04-19,Group A,Group A0,What’s Hot This Week? Find Out Here!,False,0,31.0,5.0,2.0,1.0,
+57,2004-04-19,Group B,Group B0,URGENT: THIS WEEK’S TOP-SELLING MODELS!,False,0,25.0,7.0,1.0,1.0,
+58,2004-04-26,Group A,Group A0,Your April Favorites—Back in Stock!,False,0,30.0,3.0,3.0,0.0,
+59,2004-04-26,Group B,Group B0,BACK BY POPULAR DEMAND: ORDER NOW BEFORE IT’S GONE AGAIN!,False,0,24.0,3.0,2.0,0.0,
+60,2004-05-03,Group A,Group A0,Let’s Celebrate Moms and Dads with These Collectibles,False,0,30.0,3.0,3.0,0.0,
+61,2004-05-03,Group B,Group B0,MOTHER’S & FATHER’S DAY ITEMS: DON’T WAIT TO STOCK UP!,False,0,24.0,8.0,2.0,0.0,
+62,2004-05-10,Group A,Group A0,Weekly Inspiration: Models Perfect for Father’s Day,False,0,30.0,1.0,1.0,0.0,
+63,2004-05-10,Group B,Group B0,LIMITED SUPPLY: FATHER’S DAY BESTSELLERS IN STOCK NOW!,False,0,24.0,6.0,2.0,0.0,1.0
+64,2004-05-17,Group A,Group A0,What’s Trending This Week? See Our Latest Recommendations,False,0,30.0,1.0,1.0,0.0,
+65,2004-05-17,Group B,Group B0,TIME-SENSITIVE: THIS WEEK’S MUST-HAVE MODELS!,False,0,24.0,4.0,1.0,0.0,
+66,2004-05-24,Group A,Group A0,End of May: Perfect Picks for Summer Ahead,False,0,30.0,3.0,1.0,0.0,
+67,2004-05-24,Group B,Group B0,SUMMER IS HERE: LAST CHANCE FOR MAY’S HOTTEST ITEMS!,False,0,24.0,6.0,2.0,1.0,
+68,2004-03-05,Group A,Group A4,Spring is Coming! Refresh Your Shelves with These Picks,False,4,33.0,1.0,1.0,0.0,
+69,2004-03-05,Group B,Group B4,SPRING MODELS JUST IN: ORDER BEFORE THEY’RE GONE!,False,4,31.0,2.0,1.0,1.0,
+70,2004-03-12,Group A,Group A4,Weekly Spotlight: What Your Customers Will Love This Spring,False,4,33.0,1.0,1.0,0.0,1.0
+71,2004-03-12,Group B,Group B4,ACT NOW: SPRING BESTSELLERS FLYING OFF THE SHELVES!,False,4,30.0,1.0,0.0,2.0,
+72,2004-03-19,Group A,Group A4,Mid-March Marvels: Check Out These Customer Favorites,False,4,33.0,1.0,0.0,0.0,1.0
+73,2004-03-19,Group B,Group B4,DON’T MISS OUT: MID-MARCH’S HOTTEST MODELS!,False,4,28.0,1.0,0.0,0.0,
+74,2004-03-26,Group A,Group A4,Fresh Finds for the New Season—See What’s in Stock,False,4,33.0,1.0,0.0,0.0,1.0
+75,2004-03-26,Group B,Group B4,SPRING RUSH: LIMITED STOCK ALERT—ORDER NOW!,False,4,28.0,1.0,1.0,1.0,
+76,2004-04-02,Group A,Group A4,End of March Favorites: Your Customers Will Love These,False,4,33.0,4.0,2.0,0.0,1.0
+77,2004-04-02,Group B,Group B4,SELL OUT WARNING: MARCH BESTSELLERS RUNNING LOW!,False,4,27.0,0.0,0.0,0.0,
+78,2004-04-09,Group A,Group A4,April Showers Bring Bestsellers—Stock Up Now!,False,4,33.0,2.0,1.0,0.0,2.0
+79,2004-04-09,Group B,Group B4,LIMITED EDITION MODELS FOR APRIL: ORDER FAST!,False,4,27.0,1.0,1.0,1.0,
+80,2004-04-16,Group A,Group A4,Weekly Update: Must-Have Models for April Events,False,4,33.0,1.0,0.0,0.0,1.0
+81,2004-04-16,Group B,Group B4,APRIL ESSENTIALS: DON’T LET THESE SELL OUT!,False,4,26.0,1.0,1.0,2.0,
+82,2004-04-23,Group A,Group A4,What’s Hot This Week? Find Out Here!,False,4,33.0,1.0,1.0,0.0,1.0
+83,2004-04-23,Group B,Group B4,URGENT: THIS WEEK’S TOP-SELLING MODELS!,False,4,24.0,3.0,0.0,0.0,
+84,2004-04-30,Group A,Group A4,Your April Favorites—Back in Stock!,False,4,33.0,5.0,1.0,1.0,2.0
+85,2004-04-30,Group B,Group B4,BACK BY POPULAR DEMAND: ORDER NOW BEFORE IT’S GONE AGAIN!,False,4,24.0,1.0,1.0,1.0,
+86,2004-05-07,Group A,Group A4,Let’s Celebrate Moms and Dads with These Collectibles,False,4,32.0,1.0,0.0,1.0,1.0
+87,2004-05-07,Group B,Group B4,MOTHER’S & FATHER’S DAY ITEMS: DON’T WAIT TO STOCK UP!,False,4,23.0,2.0,1.0,1.0,
+88,2004-05-14,Group A,Group A4,Weekly Inspiration: Models Perfect for Father’s Day,False,4,31.0,4.0,2.0,0.0,1.0
+89,2004-05-14,Group B,Group B4,LIMITED SUPPLY: FATHER’S DAY BESTSELLERS IN STOCK NOW!,False,4,22.0,3.0,0.0,1.0,
+90,2004-05-21,Group A,Group A4,What’s Trending This Week? See Our Latest Recommendations,False,4,31.0,2.0,2.0,0.0,
+91,2004-05-21,Group B,Group B4,TIME-SENSITIVE: THIS WEEK’S MUST-HAVE MODELS!,False,4,21.0,1.0,1.0,0.0,
+92,2004-05-28,Group A,Group A4,End of May: Perfect Picks for Summer Ahead,False,4,31.0,1.0,1.0,0.0,
+93,2004-05-28,Group B,Group B4,SUMMER IS HERE: LAST CHANCE FOR MAY’S HOTTEST ITEMS!,False,4,21.0,2.0,1.0,1.0,

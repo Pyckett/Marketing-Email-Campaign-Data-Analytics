@@ -1,0 +1,187 @@
+---
+title: "Project2 Technical Notebook"
+output: html_notebook
+---
+load in tidyverse and  libraries needed for statistical tests
+```{r}
+library(tidyverse)
+library(pwr)
+library(car)
+library(effectsize)
+```
+
+read in the email metrics csv 
+```{r}
+email_csv <- read_csv("data/email_metrics.csv")
+
+```
+read in the last email before order csv 
+```{r}
+last_email_csv <- read_csv("data/last_email_before_order.csv")
+```
+we can see that the columns of group and group code are NOT the same thing; group specifies the general category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
+
+```{r}
+distinct(email_csv, group, group_code)
+```
+create copy of original email mentrics dataset  to preserve original version
+```{r}
+cleaned_email_csv <- email_csv 
+
+```
+
+do the same for last_email_sent dataset 
+
+```{r}
+cleaned_last_email_csv <- last_email_csv
+```
+
+based on findings, due to the column number_ordered not having a single instance of 0 orders placed, we can interpret NA as there being 0 orders 
+
+```{r}
+cleaned_email_csv$number_orders[is.na(cleaned_email_csv$number_orders)] <- 0
+```
+
+we can remove the ...1 column as it is just the row index 
+
+```{r}
+cleaned_email_csv <- cleaned_email_csv %>% 
+  select(-`...1`)
+```
+
+```{r}
+cleaned_last_email_csv <- cleaned_last_email_csv %>%
+  select(-`...1`)
+```
+
+ensure that there isnt a instance of there being 0 emails sent - there is for number_opens although we can leave this as NaN because 0 opens means the email itself was never interacted with by a user 
+```{r}
+any(cleaned_email_csv$emails_sent == 0)
+any(cleaned_email_csv$number_opens == 0)
+```
+create calculated field columns that measures open rate, click rate, open to click rate, unsub rate, and order rate 
+
+```{r}
+cleaned_email_csv <- cleaned_email_csv %>% 
+  mutate(open_rate = (number_opens / emails_sent),
+         click_rate = (number_clicks / emails_sent),
+         open_to_click_rate = (number_clicks / number_opens),
+         unsubscribe_rate = (number_unsub / emails_sent),
+         order_rate = (number_orders / emails_sent)
+  )
+         
+
+```
+
+
+calculate the mean value based on tone for open rate (conversational vs alarming) 
+```{r}
+
+cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(mean_val = mean(open_rate, na.rm = TRUE))
+
+```
+
+running the leven's test based on tone  and the open rate, we recieve a p value of  0.0015. our signfiicance rate is 0.05. As 0.0015 < 0.05, we can assume that there is enough evidence that the group variances between group A and B are different and we reject the null hypothesis.
+```{r}
+leveneTest(open_rate ~ group, data = cleaned_email_csv)
+```
+due to the results of  our p value being smaller than our significance level, we run a welch test 
+```{r}
+t.test(open_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
+```
+create sample of data, group by tone, and categorize two variables of the avg open rate and standard deviation for open rate 
+```{r}
+openRate <- cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(AvgOpens = mean(open_rate), SdOpens = sd(open_rate))
+```
+
+plot tone on x axis, avg open rate as the y axis, and differentiate by tone. then create two summary statistics of both the avg open rate, and standard deviation of open rate.  I used a column graph to present my findings along with a error bar with the minimum and maximum intervals representing the areas where I expect the majority of my data to fall in. For a conversational tone, our min interval is approximately  ~0.024, and our max interval is approximately  ~ 0.14. For a alarming tone our min interval is similarly ~0.024, although the max interval is much higher, being ~0.24
+
+```{r}
+ggplot(openRate, aes(x = group, 
+                     y = AvgOpens,
+                     fill = group)) +
+                    labs(title = "Average Open Rate of Emails Based on Tone ",
+                       x = "Tone",
+                       y = "Open Rate",
+                       fill = "Tone") +
+  geom_col() + 
+  geom_errorbar(aes(ymin = AvgOpens - SdOpens, ymax = AvgOpens + SdOpens)) + scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) + scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
+```
+
+
+calculate the mean value for click rate based on tone (conversational vs alarming)
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>%
+  summarise(mean_val = mean(click_rate, na.rm = TRUE))
+```
+
+regarding  click rate, we recieved a p value of 0.66. since our p value is greater than our significance level 0.66 > 0.05,  we do not have enough evidence to conclude there is signficiant variance between the two groups 
+
+```{r}
+leveneTest(click_rate ~ group, data = cleaned_email_csv)
+```
+
+
+```{r}
+t.test(click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
+```
+
+```{r}
+ggplot(cleaned_email_csv, aes(x = group, y = click_rate)) +
+  geom_boxplot() + 
+  labs(title = "Rate of Clicks by Conversational Tone",
+       x = "Tone",
+       y = "Click Rate"
+      ) +
+  scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) + 
+  scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
+```
+
+
+
+
+
+calculate the mean value for click to open rate based on tone (conversational vs alarming) 
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>%
+  summarise(mean_val = mean(open_to_click_rate, na.rm = TRUE))
+
+
+```
+regarding open to click rate, we recieved a p value of 0.71. since our p value is greater than our significance level 0.71 > 0.05, there is not enough evidence to claim that there is variance between the two groups
+
+```{r}
+leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)
+```
+```{r}
+t.test(open_to_click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
+```
+```{r}
+open_to_click_rate_graph <- cleaned_email_csv %>%
+  filter(!is.nan(open_to_click_rate)) %>% 
+  group_by(group) %>% 
+  summarise(AvgOpenClickRate = mean(open_to_click_rate), StdOpenClickRate = sd(open_to_click_rate)) 
+```
+
+
+```{r}
+ggplot(open_to_click_rate_graph, aes(x = group, y = AvgOpenClickRate, fill = group)) + 
+  labs(title = "Average Open to Click Rate of Emails Based on Tone",
+       x = "Tone",
+       y = "Open to Click Rate",
+       fill = "Tone") + 
+  geom_col() + 
+  geom_errorbar(aes(ymin = AvgOpenClickRate - StdOpenClickRate, ymax = AvgOpenClickRate + StdOpenClickRate)) + 
+  scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
+
+```
+
+
+
