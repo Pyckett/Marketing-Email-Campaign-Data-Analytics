@@ -83,22 +83,24 @@ cleaned_email_csv %>%
 
 ```
 
-running the leven's test based on tone  and the open rate, we recieve a p value of  0.0015. our signfiicance rate is 0.05. As 0.0015 < 0.05, we can assume that there is enough evidence that the group variances between group A and B are different and we reject the null hypothesis.
+running the leven's test based on tone  and the open rate, we recieve a p value of  0.0015. our signfiicance rate is 0.05. since it indicates unequal variances between group A and group B (p = 0.0015), equal variance can't be assumed 
 ```{r}
 leveneTest(open_rate ~ group, data = cleaned_email_csv)
 ```
-due to the results of  our p value being smaller than our significance level, we run a welch test 
+because open rate is continuous and we're comparing two independent groups (group a vs group b), we run a two sample t-test. levene's test was performed to assess the difference in variance of each group, and since our p value was below 0.05, welch's  t-test is used 
+
 ```{r}
 t.test(open_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
 ```
-create sample of data, group by tone, and categorize two variables of the avg open rate and standard deviation for open rate 
+
+create a sample of data, group by tone, and categorize two variables of the avg open rate and standard deviation for open rate 
 ```{r}
 openRate <- cleaned_email_csv %>% 
   group_by(group) %>% 
   summarise(AvgOpens = mean(open_rate), SdOpens = sd(open_rate))
 ```
 
-plot tone on x axis, avg open rate as the y axis, and differentiate by tone. then create two summary statistics of both the avg open rate, and standard deviation of open rate.  I used a column graph to present my findings along with a error bar with the minimum and maximum intervals representing the areas where I expect the majority of my data to fall in. For a conversational tone, our min interval is approximately  ~0.024, and our max interval is approximately  ~ 0.14. For a alarming tone our min interval is similarly ~0.024, although the max interval is much higher, being ~0.24
+plot tone on x axis, avg open rate as the y axis, and differentiate by tone. then i  created two summary statistics of both the avg open rate, and standard deviation of open rate.  I used a column graph to present my findings along with a error bar with the minimum and maximum intervals. each error bar represent +-1 standard deviation from the mean, showing variability of open rates between group A and group B. 
 
 ```{r}
 ggplot(openRate, aes(x = group, 
@@ -120,16 +122,17 @@ cleaned_email_csv %>%
   summarise(mean_val = mean(click_rate, na.rm = TRUE))
 ```
 
-regarding  click rate, we recieved a p value of 0.66. since our p value is greater than our significance level 0.66 > 0.05,  we do not have enough evidence to conclude there is signficiant variance between the two groups 
+regarding  click rate, our levenes test returns a p value of 0.66, since it is greater than the significance level (0.05), we dont have sufficient evidence to conclude that the variances between group A and group B are different
 
 ```{r}
 leveneTest(click_rate ~ group, data = cleaned_email_csv)
 ```
-
+since the p value from the leven's test is greater than the significance level of 0.05, we can assume equal variance between group A and group B. therefore ,a independent two sample t test is used rather than a welch's t test. We specify it to be two-sided as we are testing for any difference between group A and group B rather than asserting a specific group has a higher amount 
 
 ```{r}
 t.test(click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
 ```
+a boxplot was used to visualize distribution of the click rate across group A and group B, to showcase the spread and outliers between conversational and alarming tones 
 
 ```{r}
 ggplot(cleaned_email_csv, aes(x = group, y = click_rate)) +
@@ -154,20 +157,26 @@ cleaned_email_csv %>%
 
 
 ```
-regarding open to click rate, we recieved a p value of 0.71. since our p value is greater than our significance level 0.71 > 0.05, there is not enough evidence to claim that there is variance between the two groups
-
+regarding open to click rate, we recieved a p value of 0.71. since our p value is greater than our significance level 0.71 > 0.05, we assume there is equal variance between group A and group B 
 ```{r}
 leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)
 ```
+ we can run a standard two sample t test due to the results from our leven's test with our p value being greater than our significance level, so we use equal variances along wtih a two sided approach. 
+
 ```{r}
 t.test(open_to_click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
 ```
+
+aggregate  the data into a sample dataframe that will be plotted. I filtered out any NaN values from the calculated column. 
+
 ```{r}
 open_to_click_rate_graph <- cleaned_email_csv %>%
   filter(!is.nan(open_to_click_rate)) %>% 
   group_by(group) %>% 
   summarise(AvgOpenClickRate = mean(open_to_click_rate), StdOpenClickRate = sd(open_to_click_rate)) 
 ```
+
+plot tone on x axis, avg open to click rate  as the y axis, and differentiate by tone. then created two summary statistics of both the avg open to click rate, and standard deviation of open to click rate.  I used a column graph to present  findings along with a error bar with the minimum and maximum intervals, showing variability between group A and group B . 
 
 
 ```{r}
