@@ -10,57 +10,60 @@ library(car)
 library(effectsize)
 ```
 
+
 read in the email metrics csv 
 ```{r}
 email_csv <- read_csv("data/email_metrics.csv")
 
 ```
+
+
 read in the last email before order csv 
 ```{r}
 last_email_csv <- read_csv("data/last_email_before_order.csv")
 ```
-we can see that the columns of group and group code are NOT the same thing; group specifies the general category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
 
+
+we can see that the columns of group and group code are NOT the same thing; group specifies the general category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent
 ```{r}
 distinct(email_csv, group, group_code)
 ```
+
+
 create copy of original email mentrics dataset  to preserve original version
 ```{r}
 cleaned_email_csv <- email_csv 
 
 ```
 
-do the same for last_email_sent dataset 
 
+do the same for last_email_sent dataset 
 ```{r}
 cleaned_last_email_csv <- last_email_csv
 ```
 
-based on findings, due to the column number_ordered not having a single instance of 0 orders placed, we can interpret NA as there being 0 orders 
 
+based on findings, due to the column number_ordered not having a single instance of 0 orders placed, we can interpret NA as there being 0 orders 
 ```{r}
 cleaned_email_csv$number_orders[is.na(cleaned_email_csv$number_orders)] <- 0
 ```
 
-we can remove the ...1 column as it is just the row index 
 
+we can remove the ...1 column as it is just the row index 
 ```{r}
 cleaned_email_csv <- cleaned_email_csv %>% 
   select(-`...1`)
 ```
 
-```{r}
-cleaned_last_email_csv <- cleaned_last_email_csv %>%
-  select(-`...1`)
-```
 
 ensure that there isnt a instance of there being 0 emails sent - there is for number_opens although we can leave this as NaN because 0 opens means the email itself was never interacted with by a user 
 ```{r}
 any(cleaned_email_csv$emails_sent == 0)
 any(cleaned_email_csv$number_opens == 0)
 ```
-create calculated field columns that measures open rate, click rate, open to click rate, unsub rate, and order rate 
 
+
+create calculated field columns that measures open rate, click rate, open to click rate, unsub rate, and order rate 
 ```{r}
 cleaned_email_csv <- cleaned_email_csv %>% 
   mutate(open_rate = (number_opens / emails_sent),
@@ -72,7 +75,6 @@ cleaned_email_csv <- cleaned_email_csv %>%
          
 
 ```
-
 
 
 calculate the mean value based on tone for unsubscribe rate (conversational vs alarming)
@@ -94,12 +96,13 @@ our p value is < 0.5 so we assume there is evidence to reject the null hypothesi
 t.test(unsubscribe_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
 ```
 
+
+create unsubscription graph
 ```{r}
 unsubscribe_rate_graph <- cleaned_email_csv %>%
   group_by(group) %>%
   summarise(
     mean_unsub_rate = mean(unsubscribe_rate, na.rm = TRUE),
-    sd_unsub_rate = sd(unsubscribe_rate, na.rm = TRUE)
   )
 
 ggplot(unsubscribe_rate_graph, aes(x = group, 
@@ -109,16 +112,12 @@ ggplot(unsubscribe_rate_graph, aes(x = group,
        x = "Tone",
        y = "Unsubscribe Rate",
        fill = "Tone") +
-  geom_col() + 
-  geom_errorbar(aes(ymin = mean_unsub_rate - sd_unsub_rate, 
-                    ymax = mean_unsub_rate + sd_unsub_rate),
-                width = 0.2) +
+  geom_col() +
   scale_x_discrete(labels = c("Group A" = "Conversational",
                               "Group B" = "Alarming")) +
   scale_fill_discrete(labels = c("Group A" = "Conversational",
                                  "Group B" = "Alarming"))
 ```
-
 
 
 calculate the mean value based on tone for order rate (conversational vs alarming)
@@ -141,12 +140,12 @@ t.test(order_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = 
 ```
 
 
+make order graph
 ```{r}
 order_rate_graph <- cleaned_email_csv %>%
   group_by(group) %>%
   summarise(
     mean_order_rate = mean(order_rate, na.rm = TRUE),
-    sd_order_rate = sd(order_rate, na.rm = TRUE)
   )
 
 ggplot(order_rate_graph, aes(x = group, 
@@ -156,10 +155,7 @@ ggplot(order_rate_graph, aes(x = group,
        x = "Tone",
        y = "Order Rate",
        fill = "Tone") +
-  geom_col() + 
-  geom_errorbar(aes(ymin = mean_order_rate - sd_order_rate, 
-                    ymax = mean_order_rate + sd_order_rate),
-                width = 0.2) +
+  geom_col() +
   scale_x_discrete(labels = c("Group A" = "Conversational",
                               "Group B" = "Alarming")) +
   scale_fill_discrete(labels = c("Group A" = "Conversational",
@@ -167,10 +163,13 @@ ggplot(order_rate_graph, aes(x = group,
 ```
 
 
+create sales csv
 ```{r}
 sales_data_csv <- read_csv("data/sales_data_sample.csv")
 ```
 
+
+make orders data frame merge order numbers
 ```{r}
 orders_df <- merge(cleaned_last_email_csv,
                 sales_data_csv[, c("ORDERNUMBER", "SALES")], 
@@ -178,6 +177,8 @@ orders_df <- merge(cleaned_last_email_csv,
 head(orders_df, 10)
 ```
 
+
+sum sales per order number include group
 ```{r}
 order_number_totals <- aggregate(SALES ~ ORDERNUMBER + group, 
                                  data = orders_df, 
@@ -186,18 +187,20 @@ head(order_number_totals, 45)
 ```
 
 
-sales amount (conversational vs alarming)
+sum sales per group type
 ```{r}
 group_totals <- aggregate(SALES ~ group, 
                           data = order_number_totals, 
                           sum)
 ```
 
+
+sales amount (conversational vs alarming)
 ```{r}
+options(scipen = 999)
 ggplot(group_totals, aes(x = group, y = SALES, fill = group)) +
   geom_bar(stat = "identity") +
-  labs(title = "total sales by group", 
+  labs(title = "Total Sales by Group", 
        x = "Group", 
        y = "Total Sales")
 ```
-
