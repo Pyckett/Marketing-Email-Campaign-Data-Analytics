@@ -19,7 +19,7 @@ read in the last email before order csv
 ```{r}
 last_email_csv <- read_csv("data/last_email_before_order.csv")
 ```
-we can see that the columns of group and group code are NOT the same thing; group specifies the general category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
+we can see that the columns of group and group code are NOT the same thing; group specifies the dasdas category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
 
 ```{r}
 distinct(email_csv, group, group_code)
@@ -202,7 +202,7 @@ analysis_data <- cleaned_email_csv %>%
   )
 ```
 
-# ANALYSIS: DAY VS OPEN RATE
+--- DAY VS OPEN RATE ---
 
 Calculate mean open rate by day
 
@@ -245,8 +245,12 @@ ggplot(openRateDay, aes(x = day_name, y = AvgOpens, fill = day_name)) +
        fill = "Day") +
   theme_minimal()
 ```
+--- DAY VS OPEN RATE ANALYSIS ---
 
-ANALYSIS: DAY VS CLICK RATE
+Monday is the leader for initial engagement with an average open rate significantly higher than Wednesday or Friday. Because the variance in open rates was unequal across days I used Welch's ANOVA and confirmed a significant relationship p < 0.05 between the day of the week and the likelihood of a recipient opening an email. The large error bar for Monday indicates higher volatility, but the overall rate is still higher than either Wednesday or Friday.
+
+
+---DAY VS CLICK RATE---
 
 ```{r}
 analysis_data %>% 
@@ -274,7 +278,12 @@ ggplot(analysis_data, aes(x = day_name, y = click_rate, fill = day_name)) +
        y = "Click Rate") +
   theme_minimal()
 ```
-ANALYSIS: DAY VS OPEN TO CLICK RATE
+--- DAY VS CLICK RATE ANALYSIS ---
+
+The average click rate appears more uniform across the three days than the open rate. A standard ANOVA was used here because variances were equal p > 0.5 in Levene's Test, showing that the day of the week has a lesser impact on total audience click-through than it does on opens. The box plot shows that while Monday has a higher ceiling for click rate, the median click rates for Monday, Wednesday, and Friday are relatively the same.
+
+--- DAY VS OPEN TO CLICK RATE ---
+
 Calculate otc mean values by day
 ```{r}
 analysis_data %>% 
@@ -311,4 +320,6 @@ ggplot(otc_graph_data, aes(x = day_name, y = AvgOTC, fill = day_name)) +
        fill = "Day") +
   theme_minimal()
 ```
+--- DAY VS OPEN TO CLICK RATE ANALYSIS ---
 
+Although Monday has more opens, Wednesday is slightly ahead in the Open-to-Click Rate, although it is very slight. With equal variances, the standard ANOVA shows that once an email is opened, the day it was sent has a negligible effect on the recipient's decision to click. So once an email is opened, the click rate is relatively the same, meaning that it is more important that a user opens the email in the first place, because once having done so, the click rate is fairly uniform.
