@@ -183,7 +183,7 @@ ggplot(open_to_click_rate_graph, aes(x = group, y = AvgOpenClickRate, fill = gro
 
 ```
 ```{r}
-# Abdir's section
+# Abdir's section (Beginning)
 library(tidyverse)
 email_metrics <- read_csv("data/email_metrics.csv")
 names(email_metrics)
@@ -283,6 +283,11 @@ summary(order_anova)
 summary(unsub_anova)
 summary(sales_anova)
 ```
+A one-way ANOVA test was conducted to determine whether the email send days (Mon, Wed, Fri) significantly affected unsubscribe rate, order rate, and sales amount during March - June 2004. For unsubscribe rate, the results were not statistically significant, F(2, 75) = 0.626, p = 0.538, which indicates or shows that there's no meaningful difference in unsubscribe behavior across the three send/push days. While yes it is true the bar chart shows that Wednesday has a slightly higher unsubscribe rate compared to Monday and Friday, the one-way ANOVA (Analysis of Variance) indicates that this different is not, stats-wise at least, significant. This could be random variation in unsubscribe rates across the days. 
 
+For order rate, the ANOVA approached significance but did not meet the 0.05 threshold, F(2, 31) = 3.05, p = 0.0618. Although Friday appears to generate a slightly greater order rate and Wednesday the lowest, the difference is not, stats-wise at least, significant.
 
+For sales amount, the ANOVA showed little to no significant difference between the days as F(2, 191) = 0.152, p = 0.859, suggesting the average revenue per order does not vary meaningfully based on whether emails were pushed on Mondays, Wednesdays, or Fridays. Overall, at the 0.05 significance level, there isn't a statistical evidence that email send days significantly causes an impact on the unsubscribe rate, order rate, or sales amount during this period. 
+
+Abdir's section ending.
 
