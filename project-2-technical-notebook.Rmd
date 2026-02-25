@@ -182,6 +182,107 @@ ggplot(open_to_click_rate_graph, aes(x = group, y = AvgOpenClickRate, fill = gro
   scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
 
 ```
+```{r}
+# Abdir's section
+library(tidyverse)
+email_metrics <- read_csv("data/email_metrics.csv")
+names(email_metrics)
+spec(email_metrics)
+day_data <- email_metrics %>% 
+  mutate(send_date = as.Date(date_email_sent))
+day_unsub <- day_data %>% 
+  mutate(unsubscribe_rate = number_unsub / emails_sent,
+         day_of_week = factor(day_of_week, 
+                              levels = c(0, 2, 4),
+                              labels = c("Mon", "Wed", "Fri"))
+         ) %>%
+  filter(
+    send_date >= as.Date("2004-03-01"),
+           send_date <= as.Date("2004-06-30")
+    )
+
+unsub_summary <- day_unsub %>%
+  group_by(day_of_week) %>%
+  summarise(mean_unsub = mean(unsubscribe_rate, na.rm = TRUE), .groups = "drop")
+
+ggplot(unsub_summary, aes(x = factor(day_of_week), y = mean_unsub)) +
+  geom_col(fill = "cyan") +
+  labs(title = "Unsubscribe Rate by Day of Week",
+       x = "Day of Week",
+       y = "Average Unsubscribe Rate"
+       )
+
+unsub_anova <- aov(unsubscribe_rate ~ factor(day_of_week), data = day_unsub)
+summary(unsub_anova)
+```
+```{r}
+library(tidyverse)
+email_metrics <- read_csv("data/email_metrics.csv")
+day_data_filtered <- email_metrics %>% 
+  mutate(send_date = as.Date(date_email_sent),
+         order_rate = number_orders / emails_sent,
+         day_of_week = factor(day_of_week, 
+                              levels = c(0, 2, 4),
+                              labels = c("Mon", "Wed", "Fri")))
+order_summary <- day_data %>%
+  filter(
+    send_date >= as.Date("2004-03-01"),
+           send_date <= as.Date("2004-06-30")
+    )
+
+order_summary <- day_data_filtered %>%
+  group_by(day_of_week) %>%
+  summarise(mean_order_rate = mean(order_rate, na.rm = TRUE),
+            .groups = "drop")
+
+ggplot(order_summary, aes(x = factor(day_of_week), y = mean_order_rate, na.rm = TRUE)) +
+  geom_col(fill = "cyan") +
+  labs(title = "Order Rate by Day of Week",
+       x = "Day of Week",
+       y = "Average Order Rate")
+
+order_anova <- aov(order_rate ~ factor(day_of_week), data = day_data_filtered)
+summary(order_anova)
+```
+```{r}
+library(tidyverse)
+last_email <- read_csv("data/last_email_before_order.csv")
+sales_data_csv <- read_csv("data/sales_data_sample.csv")
+
+# Joining sales with last_email using ORDERNUMBER
+orders_df <- last_email %>%
+  inner_join(
+    sales_data_csv %>% select(ORDERNUMBER, SALES),
+    by = "ORDERNUMBER"
+  ) %>%
+  mutate(
+    day_of_week = factor(day_of_week,
+                         levels = c(0, 2, 4),
+                         labels = c("Mon", "Wed", "Fri"))
+  ) %>%
+  filter(date_email_sent >= as.Date("2004-03-01"),
+         date_email_sent <= as.Date("2004-06-30")
+         )
+
+sales_summary <- orders_df %>% 
+  group_by(day_of_week) %>%
+  summarise(mean_sales = mean(SALES, na.rm = TRUE),
+            .groups = "drop")
+
+ggplot(sales_summary, aes(x = day_of_week, y = mean_sales)) +
+  geom_col(fill = "cyan") +
+  labs(title = "Average Sales Amount by Day of Week (Mar-Jun 2004)",
+       x = "Day of Week",
+       y = "Average Sales Amount")
+
+sales_anova <- aov(SALES ~ day_of_week, data = orders_df)
+summary(sales_anova)
+```
+```{r}
+summary(order_anova)
+summary(unsub_anova)
+summary(sales_anova)
+```
 
 
 
