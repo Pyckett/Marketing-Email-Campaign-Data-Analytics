@@ -167,7 +167,7 @@ leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)
 t.test(open_to_click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
 ```
 
-aggregate  the data into a sample dataframe that will be plotted. I filtered out any NaN values from the calculated column. 
+aggregate  the data into a sample data frame that will be plotted. I filtered out any NaN values from the calculated column. 
 
 ```{r}
 open_to_click_rate_graph <- cleaned_email_csv %>%
