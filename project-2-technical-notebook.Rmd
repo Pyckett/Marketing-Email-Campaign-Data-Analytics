@@ -74,44 +74,6 @@ cleaned_email_csv <- cleaned_email_csv %>%
 ```
 
 
-calculate the mean value based on tone for open rate (conversational vs alarming) 
-```{r}
-
-cleaned_email_csv %>% 
-  group_by(group) %>% 
-  summarise(mean_val = mean(open_rate, na.rm = TRUE))
-
-```
-
-running the leven's test based on tone  and the open rate, we recieve a p value of  0.0015. our signfiicance rate is 0.05. As 0.0015 < 0.05, we can assume that there is enough evidence that the group variances between group A and B are different and we reject the null hypothesis.
-```{r}
-leveneTest(open_rate ~ group, data = cleaned_email_csv)
-```
-due to the results of  our p value being smaller than our significance level, we run a welch test 
-```{r}
-t.test(open_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
-```
-create sample of data, group by tone, and categorize two variables of the avg open rate and standard deviation for open rate 
-```{r}
-openRate <- cleaned_email_csv %>% 
-  group_by(group) %>% 
-  summarise(AvgOpens = mean(open_rate), SdOpens = sd(open_rate))
-```
-
-plot tone on x axis, avg open rate as the y axis, and differentiate by tone. then create two summary statistics of both the avg open rate, and standard deviation of open rate.  I used a column graph to present my findings along with a error bar with the minimum and maximum intervals representing the areas where I expect the majority of my data to fall in. For a conversational tone, our min interval is approximately  ~0.024, and our max interval is approximately  ~ 0.14. For a alarming tone our min interval is similarly ~0.024, although the max interval is much higher, being ~0.24
-
-```{r}
-ggplot(openRate, aes(x = group, 
-                     y = AvgOpens,
-                     fill = group)) +
-                    labs(title = "Average Open Rate of Emails Based on Tone ",
-                       x = "Tone",
-                       y = "Open Rate",
-                       fill = "Tone") +
-  geom_col() + 
-  geom_errorbar(aes(ymin = AvgOpens - SdOpens, ymax = AvgOpens + SdOpens)) + scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) + scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
-```
-
 
 calculate the mean value based on tone for unsubscribe rate (conversational vs alarming)
 ```{r}
