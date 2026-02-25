@@ -113,75 +113,129 @@ ggplot(openRate, aes(x = group,
 ```
 
 
-calculate the mean value for click rate based on tone (conversational vs alarming)
+calculate the mean value based on tone for unsubscribe rate (conversational vs alarming)
 ```{r}
 cleaned_email_csv %>% 
-  group_by(group) %>%
-  summarise(mean_val = mean(click_rate, na.rm = TRUE))
-```
-
-regarding  click rate, we recieved a p value of 0.66. since our p value is greater than our significance level 0.66 > 0.05,  we do not have enough evidence to conclude there is signficiant variance between the two groups 
-
-```{r}
-leveneTest(click_rate ~ group, data = cleaned_email_csv)
-```
-
-
-```{r}
-t.test(click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
-```
-
-```{r}
-ggplot(cleaned_email_csv, aes(x = group, y = click_rate)) +
-  geom_boxplot() + 
-  labs(title = "Rate of Clicks by Conversational Tone",
-       x = "Tone",
-       y = "Click Rate"
-      ) +
-  scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) + 
-  scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
-```
-
-
-
-
-
-calculate the mean value for click to open rate based on tone (conversational vs alarming) 
-```{r}
-cleaned_email_csv %>% 
-  group_by(group) %>%
-  summarise(mean_val = mean(open_to_click_rate, na.rm = TRUE))
-
-
-```
-regarding open to click rate, we recieved a p value of 0.71. since our p value is greater than our significance level 0.71 > 0.05, there is not enough evidence to claim that there is variance between the two groups
-
-```{r}
-leveneTest(open_to_click_rate ~ group, data = cleaned_email_csv)
-```
-```{r}
-t.test(open_to_click_rate ~ group, alternative = "two.sided", conf.level = 0.95, var.equal = TRUE, data = cleaned_email_csv) 
-```
-```{r}
-open_to_click_rate_graph <- cleaned_email_csv %>%
-  filter(!is.nan(open_to_click_rate)) %>% 
   group_by(group) %>% 
-  summarise(AvgOpenClickRate = mean(open_to_click_rate), StdOpenClickRate = sd(open_to_click_rate)) 
+  summarise(mean_val = mean(unsubscribe_rate, na.rm = TRUE))
+```
+
+
+check p value
+```{r}
+leveneTest(unsubscribe_rate ~ group, data = cleaned_email_csv)
+```
+
+
+our p value is < 0.5 so we assume there is evidence to reject the null hypothesis, run a welch test
+```{r}
+t.test(unsubscribe_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
+```
+
+```{r}
+unsubscribe_rate_graph <- cleaned_email_csv %>%
+  group_by(group) %>%
+  summarise(
+    mean_unsub_rate = mean(unsubscribe_rate, na.rm = TRUE),
+    sd_unsub_rate = sd(unsubscribe_rate, na.rm = TRUE)
+  )
+
+ggplot(unsubscribe_rate_graph, aes(x = group, 
+                                   y = mean_unsub_rate,
+                                   fill = group)) +
+  labs(title = "Average Unsubscribe Rate Based on Tone",
+       x = "Tone",
+       y = "Unsubscribe Rate",
+       fill = "Tone") +
+  geom_col() + 
+  geom_errorbar(aes(ymin = mean_unsub_rate - sd_unsub_rate, 
+                    ymax = mean_unsub_rate + sd_unsub_rate),
+                width = 0.2) +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
+```
+
+
+
+calculate the mean value based on tone for order rate (conversational vs alarming)
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(mean_val = mean(order_rate, na.rm = TRUE))
+```
+
+
+check p value
+```{r}
+leveneTest(order_rate ~ group, data = cleaned_email_csv)
+```
+
+
+our p value is < 0.5 so we assume there is evidence to reject the null hypothesis, run a welch test
+```{r}
+t.test(order_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
 ```
 
 
 ```{r}
-ggplot(open_to_click_rate_graph, aes(x = group, y = AvgOpenClickRate, fill = group)) + 
-  labs(title = "Average Open to Click Rate of Emails Based on Tone",
-       x = "Tone",
-       y = "Open to Click Rate",
-       fill = "Tone") + 
-  geom_col() + 
-  geom_errorbar(aes(ymin = AvgOpenClickRate - StdOpenClickRate, ymax = AvgOpenClickRate + StdOpenClickRate)) + 
-  scale_x_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming")) +
-  scale_fill_discrete(labels = c("Group A" = "Conversational", "Group B" = "Alarming"))
+order_rate_graph <- cleaned_email_csv %>%
+  group_by(group) %>%
+  summarise(
+    mean_order_rate = mean(order_rate, na.rm = TRUE),
+    sd_order_rate = sd(order_rate, na.rm = TRUE)
+  )
 
+ggplot(order_rate_graph, aes(x = group, 
+                                   y = mean_order_rate,
+                                   fill = group)) +
+  labs(title = "Average Order Rate Based on Tone",
+       x = "Tone",
+       y = "Order Rate",
+       fill = "Tone") +
+  geom_col() + 
+  geom_errorbar(aes(ymin = mean_order_rate - sd_order_rate, 
+                    ymax = mean_order_rate + sd_order_rate),
+                width = 0.2) +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
 ```
 
 
+```{r}
+sales_data_csv <- read_csv("data/sales_data_sample.csv")
+```
+
+```{r}
+orders_df <- merge(cleaned_last_email_csv,
+                sales_data_csv[, c("ORDERNUMBER", "SALES")], 
+                by = "ORDERNUMBER")
+head(orders_df, 10)
+```
+
+```{r}
+order_number_totals <- aggregate(SALES ~ ORDERNUMBER + group, 
+                                 data = orders_df, 
+                                 sum)
+head(order_number_totals, 45)
+```
+
+
+sales amount (conversational vs alarming)
+```{r}
+group_totals <- aggregate(SALES ~ group, 
+                          data = order_number_totals, 
+                          sum)
+```
+
+```{r}
+ggplot(group_totals, aes(x = group, y = SALES, fill = group)) +
+  geom_bar(stat = "identity") +
+  labs(title = "total sales by group", 
+       x = "Group", 
+       y = "Total Sales")
+```
 
