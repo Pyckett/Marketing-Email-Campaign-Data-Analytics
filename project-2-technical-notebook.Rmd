@@ -91,7 +91,7 @@ leveneTest(unsubscribe_rate ~ group, data = cleaned_email_csv)
 ```
 
 
-our p value is < 0.5 so we assume there is evidence to reject the null hypothesis, run a welch test
+our p value is < 0.05 so we assume there is evidence to reject the null hypothesis, run a welch test
 ```{r}
 t.test(unsubscribe_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
 ```
@@ -134,7 +134,7 @@ leveneTest(order_rate ~ group, data = cleaned_email_csv)
 ```
 
 
-our p value is < 0.5 so we assume there is evidence to reject the null hypothesis, run a welch test
+our p value is < 0.05 so we assume there is evidence to reject the null hypothesis, run a welch test
 ```{r}
 t.test(order_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
 ```
@@ -192,6 +192,13 @@ sum sales per group type
 group_totals <- aggregate(SALES ~ group, 
                           data = order_number_totals, 
                           sum)
+head(group_totals, 10)
+```
+
+
+test
+```{r}
+leveneTest(SALES ~ group, data = group_totals)
 ```
 
 
@@ -200,7 +207,11 @@ sales amount (conversational vs alarming)
 options(scipen = 999)
 ggplot(group_totals, aes(x = group, y = SALES, fill = group)) +
   geom_bar(stat = "identity") +
-  labs(title = "Total Sales by Group", 
-       x = "Group", 
-       y = "Total Sales")
+  labs(title = "Total Sales by Tone", 
+       x = "Tone", 
+       y = "Total Sales") +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
 ```
