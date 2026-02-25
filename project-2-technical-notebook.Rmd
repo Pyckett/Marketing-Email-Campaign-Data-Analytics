@@ -19,7 +19,7 @@ read in the last email before order csv
 ```{r}
 last_email_csv <- read_csv("data/last_email_before_order.csv")
 ```
-we can see that the columns of group and group code are NOT the same thing; group specifies the dasdas category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
+we can see that the columns of group and group code are NOT the same thing; group specifies the general category (conversational approach vs direct) whereas group_code has subcategories within each approach. 0 2 and 4 likely correspond to the days of the week (mon, wed, fri) the emails were sent 
 
 ```{r}
 distinct(email_csv, group, group_code)
