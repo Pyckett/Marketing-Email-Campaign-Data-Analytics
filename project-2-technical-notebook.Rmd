@@ -187,22 +187,32 @@ head(order_number_totals, 45)
 ```
 
 
-sum sales per group type
+sum sales per group and find average sales per order number per group
 ```{r}
 group_totals <- aggregate(SALES ~ group, 
                           data = order_number_totals, 
                           sum)
-head(group_totals, 10)
+average_sales_group <- aggregate(SALES ~ group, 
+                          data = order_number_totals, 
+                          mean)
+head(group_totals)
+head(average_sales_group)
 ```
 
 
-test
+find p value
 ```{r}
-leveneTest(SALES ~ group, data = group_totals)
+leveneTest(SALES ~ group, data = order_number_totals)
 ```
 
 
-sales amount (conversational vs alarming)
+p value is > 0.05, variance is statistically insignificant, we accept the null hypothesis
+```{r}
+t.test(SALES ~ group, data = order_number_totals, var.equal = TRUE)
+```
+
+
+sales sum per group (conversational vs alarming)
 ```{r}
 options(scipen = 999)
 ggplot(group_totals, aes(x = group, y = SALES, fill = group)) +
@@ -215,3 +225,19 @@ ggplot(group_totals, aes(x = group, y = SALES, fill = group)) +
   scale_fill_discrete(labels = c("Group A" = "Conversational",
                                  "Group B" = "Alarming"))
 ```
+
+
+average sales per group (conversational vs alarming)
+```{r}
+options(scipen = 999)
+ggplot(average_sales_group, aes(x = group, y = SALES, fill = group)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Sales by Tone", 
+       x = "Tone", 
+       y = "Total Sales") +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
+```
+
