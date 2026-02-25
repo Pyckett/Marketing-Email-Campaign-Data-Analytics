@@ -320,6 +320,318 @@ ggplot(otc_graph_data, aes(x = day_name, y = AvgOTC, fill = day_name)) +
        fill = "Day") +
   theme_minimal()
 ```
+
+-----DREW-----
+
+
+
+calculate the mean value based on tone for unsubscribe rate (conversational vs alarming)
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(mean_val = mean(unsubscribe_rate, na.rm = TRUE))
+```
+
+
+check p value
+```{r}
+leveneTest(unsubscribe_rate ~ group, data = cleaned_email_csv)
+```
+
+
+our p value is < 0.05 so we assume there is evidence to reject the null hypothesis, run a welch test
+```{r}
+t.test(unsubscribe_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
+```
+
+
+create unsubscription graph
+```{r}
+unsubscribe_rate_graph <- cleaned_email_csv %>%
+  group_by(group) %>%
+  summarise(
+    mean_unsub_rate = mean(unsubscribe_rate, na.rm = TRUE),
+  )
+
+ggplot(unsubscribe_rate_graph, aes(x = group, 
+                                   y = mean_unsub_rate,
+                                   fill = group)) +
+  labs(title = "Average Unsubscribe Rate Based on Tone",
+       x = "Tone",
+       y = "Unsubscribe Rate",
+       fill = "Tone") +
+  geom_col() +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
+```
+
+
+calculate the mean value based on tone for order rate (conversational vs alarming)
+```{r}
+cleaned_email_csv %>% 
+  group_by(group) %>% 
+  summarise(mean_val = mean(order_rate, na.rm = TRUE))
+```
+
+
+check p value
+```{r}
+leveneTest(order_rate ~ group, data = cleaned_email_csv)
+```
+
+
+our p value is < 0.05 so we assume there is evidence to reject the null hypothesis, run a welch test
+```{r}
+t.test(order_rate ~ group, alternative = "two.sided", conf.level = 0.95, data = cleaned_email_csv)
+```
+
+
+make order graph
+```{r}
+order_rate_graph <- cleaned_email_csv %>%
+  group_by(group) %>%
+  summarise(
+    mean_order_rate = mean(order_rate, na.rm = TRUE),
+  )
+
+ggplot(order_rate_graph, aes(x = group, 
+                                   y = mean_order_rate,
+                                   fill = group)) +
+  labs(title = "Average Order Rate Based on Tone",
+       x = "Tone",
+       y = "Order Rate",
+       fill = "Tone") +
+  geom_col() +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
+```
+
+
+create sales csv
+```{r}
+sales_data_csv <- read_csv("data/sales_data_sample.csv")
+```
+
+
+make orders data frame merge order numbers
+```{r}
+orders_df <- merge(cleaned_last_email_csv,
+                sales_data_csv[, c("ORDERNUMBER", "SALES")], 
+                by = "ORDERNUMBER")
+head(orders_df, 10)
+```
+
+
+sum sales per order number include group
+```{r}
+order_number_totals <- aggregate(SALES ~ ORDERNUMBER + group, 
+                                 data = orders_df, 
+                                 sum)
+head(order_number_totals, 45)
+```
+
+
+sum sales per group and find average sales per order number per group
+```{r}
+group_totals <- aggregate(SALES ~ group, 
+                          data = order_number_totals, 
+                          sum)
+average_sales_group <- aggregate(SALES ~ group, 
+                          data = order_number_totals, 
+                          mean)
+head(group_totals)
+head(average_sales_group)
+```
+
+
+find p value
+```{r}
+leveneTest(SALES ~ group, data = order_number_totals)
+```
+
+
+p value is > 0.05, variance is statistically insignificant, we accept the null hypothesis
+```{r}
+t.test(SALES ~ group, data = order_number_totals, var.equal = TRUE)
+```
+
+
+sales sum per group (conversational vs alarming)
+```{r}
+options(scipen = 999)
+ggplot(group_totals, aes(x = group, y = SALES, fill = group)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Sales by Tone", 
+       x = "Tone", 
+       y = "Total Sales") +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
+```
+
+
+average sales per group (conversational vs alarming)
+```{r}
+options(scipen = 999)
+ggplot(average_sales_group, aes(x = group, y = SALES, fill = group)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Sales by Tone", 
+       x = "Tone", 
+       y = "Total Sales") +
+  scale_x_discrete(labels = c("Group A" = "Conversational",
+                              "Group B" = "Alarming")) +
+  scale_fill_discrete(labels = c("Group A" = "Conversational",
+                                 "Group B" = "Alarming"))
+```
+
+
+
+-------Drew------
+
+
+Filter data for the March - June period and calculate the required metrics
+
+```{r}
+
+analysis_data <- cleaned_email_csv %>%
+  filter(before_march == FALSE) %>%
+  mutate(
+    open_rate = number_opens / emails_sent,
+    click_rate = number_clicks / emails_sent,
+    open_to_click_rate = number_clicks / number_opens,
+    # Map day_of_week to descriptive names
+    day_name = case_when(
+      day_of_week == 0 ~ "Monday",
+      day_of_week == 2 ~ "Wednesday",
+      day_of_week == 4 ~ "Friday"
+    ),
+    day_name = factor(day_name, levels = c("Monday", "Wednesday", "Friday"))
+  )
+```
+
+--- DAY VS OPEN RATE ---
+
+Calculate mean open rate by day
+
+```{r}
+analysis_data %>% 
+  group_by(day_name) %>% 
+  summarise(mean_val = mean(open_rate, na.rm = TRUE))
+```
+
+Check for variance equality (Levene's Test)
+
+```{r}
+leveneTest(open_rate ~ day_name, data = analysis_data)
+```
+
+Statistical Test: Welch's ANOVA used because variances are unequal (p < 0.05)
+
+```{r}
+oneway.test(open_rate ~ day_name, data = analysis_data, var.equal = FALSE)
+```
+High f value and p < 0.05 means there is significant chance the day affects the open rate.
+
+Prepare data for Column Graph
+
+```{r}
+openRateDay <- analysis_data %>%
+  group_by(day_name) %>%
+  summarise(AvgOpens = mean(open_rate), SdOpens = sd(open_rate))
+```
+
+Visualization: Column Chart
+```{r}
+
+ggplot(openRateDay, aes(x = day_name, y = AvgOpens, fill = day_name)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = AvgOpens - SdOpens, ymax = AvgOpens + SdOpens), width = 0.2) +
+  labs(title = "Average Open Rate by Day of Week",
+       x = "Day of Week",
+       y = "Open Rate",
+       fill = "Day") +
+  theme_minimal()
+```
+--- DAY VS OPEN RATE ANALYSIS ---
+
+Monday is the leader for initial engagement with an average open rate significantly higher than Wednesday or Friday. Because the variance in open rates was unequal across days I used Welch's ANOVA and confirmed a significant relationship p < 0.05 between the day of the week and the likelihood of a recipient opening an email. The large error bar for Monday indicates higher volatility, but the overall rate is still higher than either Wednesday or Friday.
+
+
+---DAY VS CLICK RATE---
+
+```{r}
+analysis_data %>% 
+  group_by(day_name) %>% 
+  summarise(mean_click_rate = mean(click_rate, na.rm = TRUE))
+```
+Check for variance equality (Levene's Test)
+
+```{r}
+leveneTest(click_rate ~ day_name, data = analysis_data)
+```
+Statistical Test: Standard ANOVA used because variances were not unequal (p  > 0.5)
+
+```{r}
+click_anova <- aov(click_rate ~ day_name, data = analysis_data)
+summary(click_anova)
+```
+Visualization: Boxplot (To show distribution consistency)
+```{r}
+
+ggplot(analysis_data, aes(x = day_name, y = click_rate, fill = day_name)) +
+  geom_boxplot() +
+  labs(title = "Click Rate Distribution by Day of Week",
+       x = "Day of Week",
+       y = "Click Rate") +
+  theme_minimal()
+```
+--- DAY VS CLICK RATE ANALYSIS ---
+
+The average click rate appears more uniform across the three days than the open rate. A standard ANOVA was used here because variances were equal p > 0.5 in Levene's Test, showing that the day of the week has a lesser impact on total audience click-through than it does on opens. The box plot shows that while Monday has a higher ceiling for click rate, the median click rates for Monday, Wednesday, and Friday are relatively the same.
+
+--- DAY VS OPEN TO CLICK RATE ---
+
+Calculate otc mean values by day
+```{r}
+analysis_data %>% 
+  group_by(day_name) %>% 
+  summarise(mean_otc_rate = mean(open_to_click_rate, na.rm = TRUE))
+```
+
+Check for variance equality (Levene's Test)
+```{r}
+leveneTest(open_to_click_rate ~ day_name, data = analysis_data)
+```
+Statistical Test: Standard ANOVA used because variances were not unequal (p  > 0.5)
+```{r}
+otc_anova <- aov(open_to_click_rate ~ day_name, data = analysis_data)
+summary(otc_anova)
+```
+Prepare data for Column Graph
+```{r}
+otc_graph_data <- analysis_data %>%
+  filter(!is.nan(open_to_click_rate)) %>% 
+  group_by(day_name) %>%
+  summarise(AvgOTC = mean(open_to_click_rate), SdOTC = sd(open_to_click_rate))
+```
+
+Visualization: Column Chart with Error Bars
+```{r}
+
+ggplot(otc_graph_data, aes(x = day_name, y = AvgOTC, fill = day_name)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = AvgOTC - SdOTC, ymax = AvgOTC + SdOTC), width = 0.2) +
+  labs(title = "Average Open to Click Rate by Day of Week",
+       x = "Day of Week",
+       y = "Open to Click Rate",
+       fill = "Day") +
+  theme_minimal()
+```
 --- DAY VS OPEN TO CLICK RATE ANALYSIS ---
 
 Although Monday has more opens, Wednesday is slightly ahead in the Open-to-Click Rate, although it is very slight. With equal variances, the standard ANOVA shows that once an email is opened, the day it was sent has a negligible effect on the recipient's decision to click. So once an email is opened, the click rate is relatively the same, meaning that it is more important that a user opens the email in the first place, because once having done so, the click rate is fairly uniform.
