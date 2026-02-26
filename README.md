@@ -38,3 +38,9 @@ This repository contains the following:
 - RStudio
 - R libraries (tidyverse, pwr, car, effectsize, ggplot2, etc.)
 - GitHub (for version control and team collaboration)
+
+## Link to Google Presentation:
+https://docs.google.com/presentation/d/1n9PN0wm9kxXtrQvMLGaYnse8a8UyWSHvMpvyv0CiMwQ/edit?pli=1&slide=id.g3c0a8a9dd2b_0_5#slide=id.g3c0a8a9dd2b_0_5 
+
+## Link to Data Dictionary:
+https://docs.google.com/document/d/15S89H2YnHjh0lWqU_uklCY7kOayAjLoURPUZWJpE2lk/edit?tab=t.0 
