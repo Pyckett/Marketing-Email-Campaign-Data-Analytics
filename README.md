@@ -1,4 +1,4 @@
-## Project 2: Marketing Email Campaign 
+## Project 2: Marketing Email Campaign - 
 
 This repository contains an email analytics project for CSB304 (Data Analytics in Business). The goal of this project was to act as an analytics department/team for Timeless Transport Models in 2004. The company conducted A/B tets to determine the following:
 - Which email tone performs better:
@@ -15,7 +15,7 @@ We want to determine what email strategies drive more user engagement and sales.
 
 We determined the conversational tone promoted more positive user engagement via open to click rate, unsubscribe rate, and order rate. Net sales was also greater due to the incresed order rate. Additionally, we found that Monday is our best day for sending emails and reciveing back positive user engagement via open rate and click rate.
 
-## Contents in the Repository
+## Contents in this Repository:
 This repository contains the following:
 - data folder - Data sets used for this project.
 - .gitignore - a plain text file that tells Git/GitHub which files or directories to exclude from tracking in a repository.
@@ -26,7 +26,7 @@ This repository contains the following:
 - project-2-technical-notebook.Rmd - R Notebook where the graphs and statistical analysis were done.
 - project-2-technical-notebook.nb.html - HTML version of the R notebook.
 
-## How to Use This Repository 
+## How to Use This Repository:
   1. Clone the repository
   2. Install the requirements.yml using a virtual environment with the command: conda env create -f environment.yml (if using conda)
   3. Data sets are already in the repository, so open the notebook in R studio for your use.
