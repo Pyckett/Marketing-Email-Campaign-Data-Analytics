@@ -396,7 +396,7 @@ Statistical Test: Welch's ANOVA used because variances are unequal (p < 0.05)
 ```{r}
 oneway.test(open_rate ~ day_name, data = analysis_data, var.equal = FALSE)
 ```
-High f value and p < 0.05 means there is significant chance the day affects the open rate.
+High f value and p of 0.001298 < 0.05 means there is significant chance the day affects the open rate.
 
 Prepare data for Column Graph
 
@@ -441,6 +441,10 @@ Statistical Test: Standard ANOVA used because variances were not unequal (p  > 0
 click_anova <- aov(click_rate ~ day_name, data = analysis_data)
 summary(click_anova)
 ```
+
+The P value of 0.00785 < 0.05 threshold therefore we reject the null hypothesis.
+Therefore we can assume that the mean click rate difference by day is statistically significant.
+
 Visualization: Boxplot (To show distribution consistency)
 ```{r}
 
@@ -453,7 +457,7 @@ ggplot(analysis_data, aes(x = day_name, y = click_rate, fill = day_name)) +
 ```
 --- DAY VS CLICK RATE ANALYSIS ---
 
-The average click rate appears more uniform across the three days than the open rate. A standard ANOVA was used here because variances were equal p > 0.5 in Levene's Test, showing that the day of the week has a lesser impact on total audience click-through than it does on opens. The box plot shows that while Monday has a higher ceiling for click rate, the median click rates for Monday, Wednesday, and Friday are relatively the same.
+The average click rate appears more uniform across the three days than the open rate. A standard ANOVA was used here because variances were equal p > 0.5 in Levene's Test. Although the mean for Monday is higher due to a larger upward variance in click rate, we can see in the box plot that the median of the three days is almost identical. In our next test We will see that this higher click rate does not increase at the same rate as opens, leading to the three days having similar Open to Click rates.
 
 --- DAY VS OPEN TO CLICK RATE ---
 
@@ -468,11 +472,15 @@ Check for variance equality (Levene's Test)
 ```{r}
 leveneTest(open_to_click_rate ~ day_name, data = analysis_data)
 ```
-Statistical Test: Standard ANOVA used because variances were not unequal (p  > 0.5)
+Statistical Test: Standard ANOVA used because variances were not unequal (p > 0.5)
 ```{r}
 otc_anova <- aov(open_to_click_rate ~ day_name, data = analysis_data)
 summary(otc_anova)
 ```
+Our resulting p value of 0.911 > 0.05 so we fail to reject the null hypothesis.
+Meaning that there isn't a statistically significant difference in the average Open to Click
+rate between the days.
+
 Prepare data for Column Graph
 ```{r}
 otc_graph_data <- analysis_data %>%
@@ -495,7 +503,7 @@ ggplot(otc_graph_data, aes(x = day_name, y = AvgOTC, fill = day_name)) +
 ```
 --- DAY VS OPEN TO CLICK RATE ANALYSIS ---
 
-Although Monday has more opens, Wednesday is slightly ahead in the Open-to-Click Rate, although it is very slight. With equal variances, the standard ANOVA shows that once an email is opened, the day it was sent has a negligible effect on the recipient's decision to click. So once an email is opened, the click rate is relatively the same, meaning that it is more important that a user opens the email in the first place, because once having done so, the click rate is fairly uniform.
+Although Monday has more opens, Wednesday is slightly ahead in the Open-to-Click Rate, although it is very slight but this differnce isn't statistically significant.The standard ANOVA shows that once an email is opened, the day it was sent has a negligible effect on the recipient's decision to click. So once an email is opened, the click rate is relatively the same, meaning that it is more important that a user opens the email in the first place.
 
 
 ------ Matthew -----
