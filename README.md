@@ -8,6 +8,7 @@ This repository contains an email analytics project for CSB304 (Data Analytics i
     - Monday
     - Wednesday
     - Friday
+
 Using the R programming language, we conducted statistical tests, created visualizations, and interpreted the results to provide recommendations for the company.
 
 ## Business Objective:
